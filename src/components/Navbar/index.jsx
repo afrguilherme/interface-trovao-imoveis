@@ -14,10 +14,14 @@ import {
   Button,
 } from "./styles"
 
+import LogoImage from "../../assets/logo.png"
+
 const Navbar = () => {
   return (
     <Nav>
-      <Logo>Logo</Logo>
+      <Logo>
+        <img src={LogoImage} alt="logo" />
+      </Logo>
       <SearchBar>
         <SearchInput type="text" placeholder="Pesquisar..." />
         <SearchIcon />
@@ -25,7 +29,7 @@ const Navbar = () => {
       <Links>
         <NavLink href="#home">Início</NavLink>
         <NavLink href="#properties">Imóveis</NavLink>
-        <NavLink href="#contact">Contatos</NavLink>
+        <NavLink href="#contact">Contato</NavLink>
         <NavLink href="#about">Sobre</NavLink>
       </Links>
       <RightSection>

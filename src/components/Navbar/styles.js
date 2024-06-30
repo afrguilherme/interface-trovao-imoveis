@@ -5,7 +5,7 @@ export const Nav = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 40px 20px 40px 40px;
   background: #fff;
   color: #0060f6;
   height: 60px;
@@ -14,6 +14,15 @@ export const Nav = styled.nav`
 export const Logo = styled.div`
   font-size: 24px;
   font-weight: bold;
+
+  img {
+    cursor: pointer;
+    width: 60px;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
 `
 
 export const SearchBar = styled.div`
@@ -28,15 +37,25 @@ export const SearchBar = styled.div`
 export const SearchInput = styled.input`
   width: 100%;
   padding: 10px 50px 10px 25px;
-  border: 0.5px solid #3c4453;
+  border: 1px solid #3c4453;
   border-radius: 20px;
   outline: none;
+  transition: border 0.5s ease;
+
+  &:hover {
+    border: 1.5px solid #0060f6;
+  }
 `
 
 export const SearchIcon = styled(FaSearch)`
   position: absolute;
   right: 20px;
   color: #aaa;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `
 
 export const Links = styled.div`
@@ -69,16 +88,20 @@ export const Favorites = styled.div`
 
 export const FavoritesIcon = styled(FaHeart)`
   color: #3c4453;
+
+  &:hover {
+    color: #0060f6;
+  }
 `
 
 export const Button = styled.button`
-  background: ${({ primary }) => (primary ? "#007BFF" : "transparent")};
+  background: ${({ $primary }) => ($primary ? "#FF010B" : "#0060f6")};
   color: #fff;
-  border: 1px solid #fff;
-  padding: 5px 10px;
-  border-radius: 5px;
+  border: none;
+  padding: 7px 20px;
+  border-radius: 15px;
   cursor: pointer;
   &:hover {
-    background: ${({ primary }) => (primary ? "#0056b3" : "#444")};
+    opacity: 0.8;
   }
 `
