@@ -6,9 +6,11 @@ export const Nav = styled.nav`
   align-items: center;
   justify-content: space-between;
   padding: 40px 20px 40px 40px;
-  background: #fff;
+  background: #fff2eb;
   color: #0060f6;
   height: 60px;
+  z-index: 99;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
 `
 
 export const Logo = styled.div`

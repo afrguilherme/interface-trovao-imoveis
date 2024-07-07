@@ -1,5 +1,3 @@
-// import { FaHeart } from "react-icons/fa"
-
 import {
   Nav,
   Logo,
@@ -23,14 +21,14 @@ const Navbar = () => {
         <img src={LogoImage} alt="logo" />
       </Logo>
       <SearchBar>
-        <SearchInput type="text" placeholder="Pesquisar..." />
+        <SearchInput type="text" placeholder="Cidade, bairro, endereço..." />
         <SearchIcon />
       </SearchBar>
       <Links>
-        <NavLink href="#home">Início</NavLink>
-        <NavLink href="#properties">Imóveis</NavLink>
-        <NavLink href="#contact">Contato</NavLink>
-        <NavLink href="#about">Sobre</NavLink>
+        <NavLink href="/">Início</NavLink>
+        <NavLink href="/imoveis">Imóveis</NavLink>
+        <NavLink href="/contato">Contato</NavLink>
+        <NavLink href="/sobre">Sobre</NavLink>
       </Links>
       <RightSection>
         <Favorites>
