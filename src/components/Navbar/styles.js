@@ -6,8 +6,7 @@ export const Nav = styled.nav`
   align-items: center;
   justify-content: space-between;
   padding: 40px 20px 40px 40px;
-  background: #fff2eb;
-  color: #0060f6;
+  background: #fff;
   height: 60px;
   z-index: 99;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
@@ -20,9 +19,11 @@ export const Logo = styled.div`
   img {
     cursor: pointer;
     width: 60px;
+    border-radius: 10px;
 
     &:hover {
       opacity: 0.8;
+      scale: 1.01;
     }
   }
 `
@@ -45,7 +46,7 @@ export const SearchInput = styled.input`
   transition: border 0.5s ease;
 
   &:hover {
-    border: 1.5px solid #0060f6;
+    border: 1.5px solid #058690;
   }
 `
 
@@ -71,7 +72,7 @@ export const NavLink = styled.a`
   transition: color 0.2s ease;
 
   &:hover {
-    color: #0060f6;
+    color: #058690;
   }
 `
 
@@ -85,19 +86,19 @@ export const Favorites = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding-right: 20px;
+  margin-right: 20px;
 `
 
 export const FavoritesIcon = styled(FaHeart)`
   color: #3c4453;
 
   &:hover {
-    color: #0060f6;
+    color: #058690;
   }
 `
 
 export const Button = styled.button`
-  background: ${({ $primary }) => ($primary ? "#FF010B" : "#0060f6")};
+  background: ${({ $primary }) => ($primary ? "#031944" : "#058690")};
   color: #fff;
   border: none;
   padding: 7px 20px;
