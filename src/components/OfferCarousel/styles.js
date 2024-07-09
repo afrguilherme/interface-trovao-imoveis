@@ -80,7 +80,7 @@ export const BottomDetails = styled.div`
   padding: 0 42px;
 
   p {
-    color: #3c4453;
+    color: rgb(3, 25, 68, 1);
     font-size: 18px;
   }
 `

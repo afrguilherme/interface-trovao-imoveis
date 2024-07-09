@@ -9,10 +9,11 @@ import {
   RightSection,
   Favorites,
   FavoritesIcon,
-  Button,
 } from "./styles"
 
 import LogoImage from "../../assets/logo.png"
+
+import DefaultButton from "../DefaultButton"
 
 const Navbar = () => {
   return (
@@ -34,8 +35,8 @@ const Navbar = () => {
         <Favorites>
           <FavoritesIcon />
         </Favorites>
-        <Button>Entrar</Button>
-        <Button $primary>Criar Conta</Button>
+        <DefaultButton>Entrar</DefaultButton>
+        <DefaultButton $primary>Criar Conta</DefaultButton>
       </RightSection>
     </Nav>
   )
