@@ -43,6 +43,10 @@ export const Property = styled.div`
     width: 100%;
     border-radius: 20px;
     cursor: pointer;
+
+    &:hover {
+      opacity: 0.9;
+    }
   }
 
   h3 {

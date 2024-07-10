@@ -11,11 +11,15 @@ import {
   FavoritesIcon,
 } from "./styles"
 
+import { useNavigate } from "react-router-dom"
+
 import LogoImage from "../../assets/logo.png"
 
 import DefaultButton from "../DefaultButton"
 
 const Navbar = () => {
+  const navigate = useNavigate()
+
   return (
     <Nav>
       <Logo>
@@ -35,8 +39,10 @@ const Navbar = () => {
         <Favorites>
           <FavoritesIcon />
         </Favorites>
-        <DefaultButton>Entrar</DefaultButton>
-        <DefaultButton $primary>Criar Conta</DefaultButton>
+        <DefaultButton onClick={() => navigate("/login")}>Entrar</DefaultButton>
+        <DefaultButton onClick={() => navigate("/cadastrar")} $primary>
+          Criar Conta
+        </DefaultButton>
       </RightSection>
     </Nav>
   )

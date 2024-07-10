@@ -5,8 +5,13 @@ import Home from "./pages/Home"
 import Properties from "./pages/Properties"
 import Login from "./pages/Login"
 import Layout from "./components/Layout"
+import Register from "./pages/Register"
 
 const router = createBrowserRouter([
+  {
+    path: "/cadastrar",
+    element: <Register />,
+  },
   {
     path: "/login",
     element: <Login />,

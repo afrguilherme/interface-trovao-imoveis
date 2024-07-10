@@ -16,7 +16,7 @@ import DefaultButton from "../../components/DefaultButton"
 import LogoImage from "../../assets/logo.png"
 import GoogleLogo from "../../assets/google-logo.webp"
 
-function Login() {
+function Register() {
   const navigate = useNavigate()
 
   return (
@@ -40,17 +40,21 @@ function Login() {
           </div>
 
           <div>
+            <Input type="password" placeholder="Confirmar Senha" />
+          </div>
+
+          <div>
             <DefaultButton style={{ padding: "12px 0" }}>Entrar</DefaultButton>
           </div>
         </Form>
-        <Divider>ou entre com sua rede</Divider>
+        <Divider>ou cadastre com sua rede</Divider>
         <GoogleButton>
           <img src={GoogleLogo} alt="logo-google" />
-          Entrar com Google
+          Cadastrar com Google
         </GoogleButton>
       </FormContainer>
     </Container>
   )
 }
 
-export default Login
+export default Register
