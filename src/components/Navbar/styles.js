@@ -13,9 +13,6 @@ export const Nav = styled.nav`
 `
 
 export const Logo = styled.div`
-  font-size: 24px;
-  font-weight: bold;
-
   img {
     cursor: pointer;
     width: 60px;

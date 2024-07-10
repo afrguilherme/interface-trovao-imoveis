@@ -1,16 +1,13 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 
-import { RouterProvider } from "react-router-dom"
+import { RouterProvider } from "react-router-dom" // Remova BrowserRouter se estava importado e não utilizado
 import router from "./routes.jsx"
 import { GlobalStyles } from "./GlobalStyles"
-
-import Navbar from "./components/Navbar"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <GlobalStyles />
-    <Navbar />
     <RouterProvider router={router} />
   </React.StrictMode>
 )
