@@ -1,23 +1,45 @@
+import { useForm } from "react-hook-form"
+import { useNavigate } from "react-router-dom"
+import * as Yup from "yup"
+import { yupResolver } from "@hookform/resolvers/yup"
+
 import {
   Container,
   BackButton,
   FormContainer,
   Logo,
-  Form,
   Input,
   Divider,
   GoogleButton,
 } from "./styles"
 
-import { useNavigate } from "react-router-dom"
-
 import DefaultButton from "../../components/DefaultButton"
+import ErrorMessage from "../../components/ErrorMessage"
 
 import LogoImage from "../../assets/logo.png"
 import GoogleLogo from "../../assets/google-logo.webp"
 
 function Login() {
   const navigate = useNavigate()
+
+  const schema = Yup.object().shape({
+    email: Yup.string()
+      .email("Digite um e-mail válido")
+      .required("O campo e-mail é obrigatório"),
+    password: Yup.string()
+      .required("O campo senha é obrigatório")
+      .min(6, "A senha deve ter pelo menos 6 dígitos"),
+  })
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  })
+
+  const onSubmit = (data) => console.log(data)
 
   return (
     <Container>
@@ -26,23 +48,33 @@ function Login() {
         <Logo>
           <img src={LogoImage} alt="logo" />
         </Logo>
-        <Form>
+        <form noValidate onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <Input placeholder="Nome" />
+            <Input
+              type="email"
+              placeholder="E-mail"
+              {...register("email")}
+              $error={errors.email?.message}
+            />
+            <ErrorMessage>{errors.email?.message}</ErrorMessage>
           </div>
 
           <div>
-            <Input type="email" placeholder="E-mail" />
+            <Input
+              type="password"
+              placeholder="Senha"
+              {...register("password")}
+              $error={errors.password?.message}
+            />
+            <ErrorMessage>{errors.password?.message}</ErrorMessage>
           </div>
 
           <div>
-            <Input type="password" placeholder="Senha" />
+            <DefaultButton style={{ padding: "12px 0" }} type="submit">
+              Entrar
+            </DefaultButton>
           </div>
-
-          <div>
-            <DefaultButton style={{ padding: "12px 0" }}>Entrar</DefaultButton>
-          </div>
-        </Form>
+        </form>
         <Divider>ou entre com sua rede</Divider>
         <GoogleButton>
           <img src={GoogleLogo} alt="logo-google" />
