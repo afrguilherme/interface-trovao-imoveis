@@ -1,7 +1,10 @@
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
+
 import * as Yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
+
+import api from "../../services/api"
 
 import {
   Container,
@@ -39,7 +42,13 @@ function Login() {
     resolver: yupResolver(schema),
   })
 
-  const onSubmit = (data) => console.log(data)
+  const onSubmit = async (data) => {
+    const response = await api.post("session", {
+      email: data.email,
+      password: data.password,
+    })
+    console.log(response)
+  }
 
   return (
     <Container>
