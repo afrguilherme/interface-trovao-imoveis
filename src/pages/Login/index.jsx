@@ -14,6 +14,7 @@ import {
   Input,
   Divider,
   GoogleButton,
+  RegisterOption,
 } from "./styles"
 
 import DefaultButton from "../../components/DefaultButton"
@@ -52,7 +53,7 @@ function Login() {
 
   return (
     <Container>
-      <BackButton onClick={() => navigate(-1)}>Voltar</BackButton>
+      <BackButton onClick={() => navigate("/")}>Voltar</BackButton>
       <FormContainer>
         <Logo>
           <img src={LogoImage} alt="logo" />
@@ -89,6 +90,9 @@ function Login() {
           <img src={GoogleLogo} alt="logo-google" />
           Entrar com Google
         </GoogleButton>
+        <RegisterOption>
+          Não possui uma conta? <a href="/cadastrar">Cadastre-se aqui!</a>
+        </RegisterOption>
       </FormContainer>
     </Container>
   )

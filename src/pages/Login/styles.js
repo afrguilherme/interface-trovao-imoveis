@@ -46,6 +46,11 @@ export const FormContainer = styled.div`
   }
 `
 
+export const RegisterOption = styled.p`
+  font-size: 16px;
+  color: #3c4453;
+`
+
 export const Logo = styled.div`
   img {
     cursor: pointer;

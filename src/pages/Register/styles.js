@@ -32,6 +32,23 @@ export const FormContainer = styled.div`
   gap: 50px;
   width: 100%;
   max-width: 450px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 100%;
+    div {
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+  }
+`
+
+export const LoginOption = styled.p`
+  font-size: 16px;
+  color: #3c4453;
 `
 
 export const Logo = styled.div`
@@ -47,22 +64,11 @@ export const Logo = styled.div`
   }
 `
 
-export const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  width: 100%;
-  div {
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-  }
-`
-
 export const Input = styled.input`
   width: 100%;
   padding: 10px 50px 10px 15px;
-  border: 1px solid #3c4453;
+  border: ${(props) =>
+    props.$error ? "1px solid #ff2222" : "1px solid #3c4453"};
   border-radius: 10px;
   outline: none;
   transition: border 0.5s ease;
