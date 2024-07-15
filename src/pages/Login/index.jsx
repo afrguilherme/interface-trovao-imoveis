@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom"
 import * as Yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 
+import toast, { Toaster } from "react-hot-toast"
+
 import api from "../../services/api"
 
 import {
@@ -44,11 +46,20 @@ function Login() {
   })
 
   const onSubmit = async (data) => {
-    const response = await api.post("session", {
+    const response = api.post("session", {
       email: data.email,
       password: data.password,
     })
-    console.log(response)
+
+    toast.promise(response, {
+      loading: "Verificando seus dados...",
+      success: (info) => {
+        return `Bem vindo, ${info.data.name}`
+      },
+      error: (err) => {
+        return "Dados incorretos..."
+      },
+    })
   }
 
   return (
