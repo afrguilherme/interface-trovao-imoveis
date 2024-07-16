@@ -4,6 +4,8 @@ import * as Yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import { useForm } from "react-hook-form"
 
+import toast, { Toaster } from "react-hot-toast"
+
 import api from "../../services/api"
 
 import {
@@ -48,12 +50,27 @@ function Register() {
   })
 
   const onSubmit = async (data) => {
-    const response = await api.post("users", {
-      name: data.name,
-      email: data.email,
-      password: data.password,
-    })
-    console.log(response)
+    try {
+      const { status } = await api.post(
+        "users",
+        {
+          name: data.name,
+          email: data.email,
+          password: data.password,
+        },
+        { validateStatus: () => true }
+      )
+
+      if (status === 201 || status === 200) {
+        toast.success("Usuário cadastrado com sucesso")
+      } else if (status === 409) {
+        toast.error("Este email já está cadastrado")
+      } else {
+        throw new Error()
+      }
+    } catch (err) {
+      toast.error("Falha no sistema")
+    }
   }
 
   const navigate = useNavigate()

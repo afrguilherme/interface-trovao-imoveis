@@ -10,7 +10,7 @@ import { Toaster } from "react-hot-toast"
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <GlobalStyles />
-    <Toaster />
+    <Toaster position="top-right" />
     <RouterProvider router={router} />
   </React.StrictMode>
 )

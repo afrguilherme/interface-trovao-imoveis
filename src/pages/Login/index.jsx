@@ -54,10 +54,10 @@ function Login() {
     toast.promise(response, {
       loading: "Verificando seus dados...",
       success: (info) => {
-        return `Bem vindo, ${info.data.name}`
+        return `Seja bem vindo!`
       },
       error: (err) => {
-        return "Dados incorretos..."
+        return "Dados incorretos"
       },
     })
   }

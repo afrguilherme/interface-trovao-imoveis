@@ -4,6 +4,7 @@ export const Button = styled.button`
   background: ${({ $primary }) => ($primary ? "#031944" : "#058690")};
   color: #fff;
   border: none;
+  outline: none;
   padding: 7px 20px;
   border-radius: 15px;
   font-size: 16px;
