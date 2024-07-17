@@ -29,9 +29,7 @@ import { useUser } from "../../hooks/UserContext.jsx"
 function Login() {
   const navigate = useNavigate()
 
-  const users = useUser()
-
-  console.log(users)
+  const { putUserData, userData } = useUser()
 
   const schema = Yup.object().shape({
     email: Yup.string()
@@ -50,21 +48,29 @@ function Login() {
     resolver: yupResolver(schema),
   })
 
-  const onSubmit = async (data) => {
-    const response = api.post("session", {
-      email: data.email,
-      password: data.password,
-    })
+  const onSubmit = async (info) => {
+    try {
+      const { status, data } = await api.post(
+        "session",
+        {
+          email: info.email,
+          password: info.password,
+        },
+        { validateStatus: () => true }
+      )
 
-    toast.promise(response, {
-      loading: "Verificando seus dados...",
-      success: (info) => {
-        return `Seja bem vindo!`
-      },
-      error: (err) => {
-        return "Dados incorretos"
-      },
-    })
+      if (status === 200) {
+        toast.success("Seja bem vindo!")
+      } else if (status === 401) {
+        toast.error("Dados incorretos")
+      } else {
+        throw new Error()
+      }
+
+      putUserData(data)
+    } catch (err) {
+      toast.error("Falha no sistema")
+    }
   }
 
   return (
