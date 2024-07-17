@@ -1,7 +1,9 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 
-import { RouterProvider } from "react-router-dom" // Remova BrowserRouter se estava importado e não utilizado
+import { UserProvider } from "./hooks/UserContext.jsx"
+
+import { RouterProvider } from "react-router-dom"
 import router from "./routes.jsx"
 
 import { GlobalStyles } from "./GlobalStyles"
@@ -11,6 +13,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <GlobalStyles />
     <Toaster position="top-right" />
-    <RouterProvider router={router} />
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
   </React.StrictMode>
 )

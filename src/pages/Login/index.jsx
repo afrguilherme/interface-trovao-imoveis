@@ -24,9 +24,14 @@ import ErrorMessage from "../../components/ErrorMessage"
 
 import LogoImage from "../../assets/logo.png"
 import GoogleLogo from "../../assets/google-logo.webp"
+import { useUser } from "../../hooks/UserContext.jsx"
 
 function Login() {
   const navigate = useNavigate()
+
+  const users = useUser()
+
+  console.log(users)
 
   const schema = Yup.object().shape({
     email: Yup.string()
