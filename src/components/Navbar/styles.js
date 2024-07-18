@@ -76,14 +76,20 @@ export const NavLink = styled.a`
 export const RightSection = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 2rem;
+`
+
+export const UserRightSection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  padding-right: 10px;
 `
 
 export const Favorites = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
-  margin-right: 20px;
 `
 
 export const FavoritesIcon = styled(FaHeart)`
@@ -91,6 +97,25 @@ export const FavoritesIcon = styled(FaHeart)`
 
   &:hover {
     color: #058690;
+  }
+`
+
+export const UserInfo = styled.div`
+  font-size: 16px;
+  font-weight: 400;
+  color: #3c4453;
+`
+
+export const Logout = styled.button`
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #e00707;
+  font-size: 16px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
   }
 `
 

@@ -96,6 +96,6 @@ export const FavoriteStyles = styled(FaHeart)`
   cursor: pointer;
 
   &:hover {
-    color: red;
+    color: #e00707;
   }
 `
