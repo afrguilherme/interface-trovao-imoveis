@@ -1,13 +1,29 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 
 const UserContext = createContext({})
 
 export const UserProvider = ({ children }) => {
   const [userData, setUserData] = useState({})
 
-  const putUserData = (userInfo) => {
+  const putUserData = async (userInfo) => {
     setUserData(userInfo)
+
+    await localStorage.setItem(
+      "trovaoimoveis:userData",
+      JSON.stringify(userInfo)
+    )
   }
+
+  useEffect(() => {
+    const loadUserData = async () => {
+      const clientInfo = await localStorage.getItem("trovaoimoveis:userData")
+
+      if (clientInfo) {
+        setUserData(JSON.parse(clientInfo))
+      }
+    }
+    loadUserData()
+  }, [])
 
   return (
     <UserContext.Provider value={{ putUserData, userData }}>
