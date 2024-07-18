@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 
 import * as Yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -25,7 +26,17 @@ import ErrorMessage from "../../components/ErrorMessage"
 import LogoImage from "../../assets/logo.png"
 import GoogleLogo from "../../assets/google-logo.webp"
 
+import { useUser } from "../../hooks/UserContext.jsx"
+
 function Register() {
+  const { userData, putUserData } = useUser()
+
+  useEffect(() => {
+    if (userData && Object.keys(userData).length > 0) {
+      navigate("/")
+    }
+  }, [userData])
+
   const schema = Yup.object().shape({
     name: Yup.string("Digite um nome válido").required(
       "O campo nome é obrigatório"

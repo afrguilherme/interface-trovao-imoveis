@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
+import { useEffect } from "react"
 
 import * as Yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -31,7 +32,11 @@ function Login() {
 
   const { putUserData, userData } = useUser()
 
-  console.log(userData)
+  useEffect(() => {
+    if (userData && Object.keys(userData).length > 0) {
+      navigate("/")
+    }
+  }, [userData])
 
   const schema = Yup.object().shape({
     email: Yup.string()
