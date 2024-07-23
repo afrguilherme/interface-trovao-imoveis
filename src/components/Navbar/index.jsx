@@ -15,6 +15,7 @@ import {
   Favorites,
   FavoritesIcon,
   UserInfo,
+  UserIcon,
   Logout,
 } from "./styles"
 
@@ -72,6 +73,7 @@ const Navbar = () => {
             <FavoritesIcon />
           </Favorites>
           <UserInfo>
+            <UserIcon />
             <p>{userData.name}</p>
           </UserInfo>
           <Logout onClick={logout}>Sair</Logout>

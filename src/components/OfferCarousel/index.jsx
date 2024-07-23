@@ -3,15 +3,17 @@ import { useEffect, useState } from "react"
 
 import {
   CarouselStyles,
-  Property,
-  NeighborhoodButton,
-  FavoriteStyles,
-  BottomDetails,
+  // Property,
+  // NeighborhoodButton,
+  // FavoriteStyles,
+  //BottomDetails,
 } from "./styles"
 
-import PropertyDetails from "../PropertyDetails"
+// import PropertyDetails from "../PropertyDetails"
 
-import { formatCurrency } from "../../utils/currency"
+// import { formatCurrency } from "../../utils/currency"
+
+import PropertyCard from "../PropertyCard"
 
 const OfferCarousel = () => {
   const [properties, setProperties] = useState([])
@@ -30,20 +32,7 @@ const OfferCarousel = () => {
         properties
           .filter((property) => property.offer === true)
           .map((property) => (
-            <Property className="property-div" key={property.id}>
-              <img src={property.url[0]} alt="ícone do imóvel" />
-              <NeighborhoodButton>{property.name}</NeighborhoodButton>
-              <PropertyDetails
-                dimensions={property.dimensions}
-                bathrooms={property.bathrooms}
-                parkingSpace={property.parking_space}
-                rooms={property.rooms}
-              />
-              <BottomDetails>
-                <p>{formatCurrency(property.price)}</p>
-                <FavoriteStyles />
-              </BottomDetails>
-            </Property>
+            <PropertyCard key={property.id} property={property} />
           ))}
     </CarouselStyles>
   )

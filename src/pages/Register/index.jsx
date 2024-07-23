@@ -91,7 +91,9 @@ function Register() {
       <BackButton onClick={() => navigate("/")}>Voltar</BackButton>
       <FormContainer>
         <Logo>
-          <img src={LogoImage} alt="logo" />
+          <button onClick={() => navigate("/")}>
+            <img src={LogoImage} alt="logo" />
+          </button>
         </Logo>
 
         <form noValidate onSubmit={handleSubmit(onSubmit)}>

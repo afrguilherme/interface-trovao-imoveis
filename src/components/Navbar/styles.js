@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { FaSearch, FaHeart } from "react-icons/fa"
+import { FaSearch, FaHeart, FaUser } from "react-icons/fa"
 
 export const Nav = styled.nav`
   display: flex;
@@ -80,6 +80,7 @@ export const RightSection = styled.div`
 `
 
 export const UserRightSection = styled.div`
+  height: 40px;
   display: flex;
   align-items: center;
   gap: 3rem;
@@ -92,8 +93,18 @@ export const Favorites = styled.div`
   cursor: pointer;
 `
 
+export const UserIcon = styled(FaUser)`
+  font-size: 20px;
+  cursor: pointer;
+
+  &:hover {
+    color: #058690;
+  }
+`
+
 export const FavoritesIcon = styled(FaHeart)`
   color: #3c4453;
+  font-size: 20px;
 
   &:hover {
     color: #058690;
@@ -101,9 +112,23 @@ export const FavoritesIcon = styled(FaHeart)`
 `
 
 export const UserInfo = styled.div`
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
   font-size: 16px;
   font-weight: 400;
   color: #3c4453;
+  border-left: 1px solid #3c4453;
+  padding-left: 40px;
+
+  p {
+    cursor: pointer;
+
+    &:hover {
+      color: #058690;
+    }
+  }
 `
 
 export const Logout = styled.button`

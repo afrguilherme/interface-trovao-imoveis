@@ -52,6 +52,11 @@ export const RegisterOption = styled.p`
 `
 
 export const Logo = styled.div`
+  button {
+    border: none;
+    outline: none;
+  }
+
   img {
     cursor: pointer;
     width: 60px;
