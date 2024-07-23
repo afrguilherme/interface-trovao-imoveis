@@ -1,17 +1,7 @@
 import api from "../../services/api"
 import { useEffect, useState } from "react"
 
-import {
-  CarouselStyles,
-  // Property,
-  // NeighborhoodButton,
-  // FavoriteStyles,
-  //BottomDetails,
-} from "./styles"
-
-// import PropertyDetails from "../PropertyDetails"
-
-// import { formatCurrency } from "../../utils/currency"
+import { CarouselStyles } from "./styles"
 
 import PropertyCard from "../PropertyCard"
 

@@ -10,6 +10,7 @@ export const Nav = styled.nav`
   height: 60px;
   z-index: 99;
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+  margin-bottom: 20px;
 `
 
 export const Logo = styled.div`

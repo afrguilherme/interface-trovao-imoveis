@@ -31,6 +31,7 @@ export const Property = styled.div`
 `
 
 export const NeighborhoodButton = styled.button`
+  width: 90%;
   background-color: #fff;
   color: #058690;
   border: 1px solid #058690;
@@ -65,8 +66,7 @@ export const BottomDetails = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  padding: 0 42px;
+  width: 70%;
 
   p {
     color: rgb(3, 25, 68, 1);
