@@ -19,40 +19,36 @@ import {
   Logout,
 } from "./styles"
 
-import toast, { Toaster } from "react-hot-toast"
-
 import LogoImage from "../../assets/logo.png"
 
+import LogoutModal from "../LogoutModal"
 import DefaultButton from "../DefaultButton"
 
 const Navbar = () => {
   const navigate = useNavigate()
+  const [isLogoutModalVisible, setIsLogoutModalVisible] = useState(false)
 
   const { putUserData, userData } = useUser()
 
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
 
+  const showLogoutModal = () => {
+    setIsLogoutModalVisible(true)
+    document.body.style.overflow = "hidden"
+  }
+
+  const hideLogoutModal = () => {
+    setIsLogoutModalVisible(false)
+    document.body.style.overflow = "auto"
+  }
+
   useEffect(() => {
     setIsUserLoggedIn(userData && Object.keys(userData).length > 0)
   }, [userData])
 
-  const logout = () => {
-    try {
-      localStorage.removeItem("trovaoimoveis:userData")
-      putUserData({})
-
-      setTimeout(() => {
-        navigate("/login")
-      }, 1500)
-
-      toast.success("Você saiu da sua conta com sucesso")
-    } catch (err) {
-      toast.error("Falha no sistema")
-    }
-  }
-
   return (
     <Nav>
+      <LogoutModal isVisible={isLogoutModalVisible} onClose={hideLogoutModal} />
       <Logo>
         <img src={LogoImage} alt="logo" />
       </Logo>
@@ -76,7 +72,7 @@ const Navbar = () => {
             <UserIcon />
             <p>{userData.name}</p>
           </UserInfo>
-          <Logout onClick={logout}>Sair</Logout>
+          <Logout onClick={showLogoutModal}>Sair</Logout>
         </UserRightSection>
       ) : (
         <RightSection>
