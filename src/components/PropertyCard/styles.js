@@ -11,6 +11,7 @@ export const Property = styled.div`
   border-radius: 20px;
   padding: 10px;
   outline: none;
+  cursor: pointer;
 
   img {
     max-width: 300px;

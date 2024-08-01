@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useUser } from "../../hooks/UserContext.jsx"
 import { useNavigate } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 
 import {
   Nav,
@@ -27,10 +28,15 @@ import DefaultButton from "../DefaultButton"
 const Navbar = () => {
   const navigate = useNavigate()
   const [isLogoutModalVisible, setIsLogoutModalVisible] = useState(false)
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const { putUserData, userData } = useUser()
 
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
+  useEffect(() => {
+    setIsUserLoggedIn(userData && Object.keys(userData).length > 0)
+  }, [userData])
 
   const showLogoutModal = () => {
     setIsLogoutModalVisible(true)
@@ -42,9 +48,16 @@ const Navbar = () => {
     document.body.style.overflow = "auto"
   }
 
-  useEffect(() => {
-    setIsUserLoggedIn(userData && Object.keys(userData).length > 0)
-  }, [userData])
+  const handleSearch = () => {
+    setSearchParams({ q: searchQuery })
+    navigate(`/imoveis?q=${searchQuery}`)
+  }
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSearch()
+    }
+  }
 
   return (
     <Nav>
@@ -53,8 +66,14 @@ const Navbar = () => {
         <img src={LogoImage} alt="logo" />
       </Logo>
       <SearchBar>
-        <SearchInput type="text" placeholder="Cidade, bairro, endereço..." />
-        <SearchIcon />
+        <SearchInput
+          type="text"
+          placeholder="Cidade, bairro, endereço..."
+          value={searchQuery}
+          onChange={(data) => setSearchQuery(data.target.value)}
+          onKeyPress={handleKeyPress}
+        />
+        <SearchIcon onClick={handleSearch} />
       </SearchBar>
       <Links>
         <NavLink href="/">Início</NavLink>

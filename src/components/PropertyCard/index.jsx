@@ -12,7 +12,7 @@ const PropertyCard = ({ property }) => {
   return (
     <Property className="property-div">
       <img src={property.url[0]} alt="ícone do imóvel" />
-      <NeighborhoodButton>{property.name}</NeighborhoodButton>
+      <NeighborhoodButton>{property.neighborhood}</NeighborhoodButton>
       <PropertyDetails
         dimensions={property.dimensions}
         bathrooms={property.bathrooms}
