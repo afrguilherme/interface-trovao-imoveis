@@ -7,7 +7,7 @@ export const Property = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid rgb(3, 25, 68, 35%);
+  border: 1px solid rgba(60, 68, 83, 0.4);
   border-radius: 20px;
   padding: 10px;
   outline: none;

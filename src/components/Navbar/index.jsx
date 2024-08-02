@@ -63,7 +63,9 @@ const Navbar = () => {
     <Nav>
       <LogoutModal isVisible={isLogoutModalVisible} onClose={hideLogoutModal} />
       <Logo>
-        <img src={LogoImage} alt="logo" />
+        <button onClick={() => navigate("/")}>
+          <img src={LogoImage} alt="logo" />
+        </button>
       </Logo>
       <SearchBar>
         <SearchInput

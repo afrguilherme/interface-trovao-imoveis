@@ -14,6 +14,12 @@ export const Nav = styled.nav`
 `
 
 export const Logo = styled.div`
+  button {
+    background: transparent;
+    outline: none;
+    border: none;
+  }
+
   img {
     cursor: pointer;
     width: 60px;
