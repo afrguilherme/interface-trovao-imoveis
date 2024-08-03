@@ -83,3 +83,17 @@ export const Select = styled.select`
     padding: 8px;
   }
 `
+
+export const FavoritesContent = styled.div`
+  width: 100%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    color: #3c4453;
+    font-size: 16px;
+    font-weight: 500;
+  }
+`

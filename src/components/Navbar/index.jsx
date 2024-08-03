@@ -87,7 +87,7 @@ const Navbar = () => {
       {isUserLoggedIn ? (
         <UserRightSection>
           <Favorites>
-            <FavoritesIcon />
+            <FavoritesIcon onClick={() => navigate("/favoritos")} />
           </Favorites>
           <UserInfo>
             <UserIcon />
@@ -98,7 +98,7 @@ const Navbar = () => {
       ) : (
         <RightSection>
           <Favorites>
-            <FavoritesIcon />
+            <FavoritesIcon onClick={() => navigate("/login")} />
           </Favorites>
           <DefaultButton onClick={() => navigate("/login")}>
             Entrar

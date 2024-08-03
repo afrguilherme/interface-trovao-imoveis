@@ -97,10 +97,10 @@ export const UserRightSection = styled.div`
 export const Favorites = styled.div`
   display: flex;
   align-items: center;
-  cursor: pointer;
 `
 
-export const UserIcon = styled(FaUser)`
+export const FavoritesIcon = styled(FaHeart)`
+  color: #3c4453;
   font-size: 20px;
   cursor: pointer;
 
@@ -109,9 +109,9 @@ export const UserIcon = styled(FaUser)`
   }
 `
 
-export const FavoritesIcon = styled(FaHeart)`
-  color: #3c4453;
+export const UserIcon = styled(FaUser)`
   font-size: 20px;
+  cursor: pointer;
 
   &:hover {
     color: #058690;

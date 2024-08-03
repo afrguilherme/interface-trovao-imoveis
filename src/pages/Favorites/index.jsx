@@ -1,4 +1,7 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+
+import { useUser } from "../../hooks/UserContext.jsx"
 
 import {
   Container,
@@ -8,10 +11,21 @@ import {
   FavoritesHeader,
   FavoriteCount,
   Select,
+  FavoritesContent,
 } from "./styles"
 
 function Favorites() {
+  const { putUserData, userData } = useUser()
+
   const [sortOption, setSortOption] = useState("Mais recentes")
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!userData || !Object.keys(userData).length > 0) {
+      navigate("/login")
+    }
+  }, [userData])
 
   const handleSortChange = (event) => {
     setSortOption(event.target.value)
@@ -35,6 +49,9 @@ function Favorites() {
               <option value="Menor preço">Menor preço</option>
             </Select>
           </FavoritesHeader>
+          <FavoritesContent>
+            <p>Não há anúncios favoritos :(</p>
+          </FavoritesContent>
         </FavoritesContainer>
       </Main>
     </Container>
