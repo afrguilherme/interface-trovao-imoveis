@@ -18,11 +18,12 @@ import {
   FavoritesContent,
   CardsContainer,
   FavoriteCard,
+  DeleteIcon,
 } from "./styles"
 
 function Favorites() {
   const { userData } = useUser()
-  const { putFavorites, favoritesProperties } = useFavorites()
+  const { putFavorites, favoritesProperties, removeFavorite } = useFavorites()
 
   const [sortOption, setSortOption] = useState("Mais recentes")
   const [favoriteCount, setFavoriteCount] = useState(0)
@@ -44,6 +45,10 @@ function Favorites() {
     //Adicionar restante da lógica de ordenar favoritos aqui.
   }
 
+  const deleteFavorite = (propertyId) => {
+    removeFavorite(propertyId)
+  }
+
   return (
     <Container>
       <Main>
@@ -61,34 +66,40 @@ function Favorites() {
               <option value="Menor preço">Menor preço</option>
             </Select>
           </FavoritesHeader>
-          {/* <FavoritesContent>
-            <p>Não há anúncios favoritos :(</p>
-          </FavoritesContent> */}
-          <CardsContainer>
-            {favoritesProperties &&
-              favoritesProperties.map((property) => (
-                <FavoriteCard>
-                  <div className="left-section">
-                    <img alt="imagem-imóvel" src={property.url[0]} />
-                    <div className="property-info">
-                      <div>
-                        <p style={{ marginBottom: "10px" }}>{property.name}</p>
-                        <p style={{ color: "#000", fontSize: "18px" }}>
-                          {formatCurrency(property.price)}
-                        </p>
-                      </div>
-                      <div>
-                        <p>{property.neighborhood}</p>
-                        <p style={{ fontSize: "12px", marginTop: "8px" }}>
-                          {formatDate(property.createdAt)} -{" "}
-                          {formatTime(property.createdAt)}
-                        </p>
+          {favoriteCount === 0 ? (
+            <FavoritesContent>
+              <p>Não há anúncios favoritos :(</p>
+            </FavoritesContent>
+          ) : (
+            <CardsContainer>
+              {favoritesProperties &&
+                favoritesProperties.map((property) => (
+                  <FavoriteCard>
+                    <div className="left-section">
+                      <img alt="imagem-imóvel" src={property.url[0]} />
+                      <div className="property-info">
+                        <div>
+                          <p style={{ marginBottom: "10px" }}>
+                            {property.name}
+                          </p>
+                          <p style={{ color: "#000", fontSize: "18px" }}>
+                            {formatCurrency(property.price)}
+                          </p>
+                        </div>
+                        <div>
+                          <p>{property.neighborhood}</p>
+                          <p style={{ fontSize: "12px", marginTop: "8px" }}>
+                            {formatDate(property.createdAt)} -{" "}
+                            {formatTime(property.createdAt)}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </FavoriteCard>
-              ))}
-          </CardsContainer>
+                    <DeleteIcon onClick={() => deleteFavorite(property.id)} />
+                  </FavoriteCard>
+                ))}
+            </CardsContainer>
+          )}
         </FavoritesContainer>
       </Main>
     </Container>

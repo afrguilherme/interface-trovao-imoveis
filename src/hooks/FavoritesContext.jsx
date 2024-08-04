@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
+import toast, { Toaster } from "react-hot-toast"
 
 const FavoritesContext = createContext({})
 
@@ -15,10 +16,33 @@ export const FavoritesProvider = ({ children }) => {
       const updatedFavorites = [...storedFavorites, property]
       setFavoritesProperties(updatedFavorites)
 
-      await localStorage.setItem(
+      try {
+        await localStorage.setItem(
+          "trovaoimoveis:favoritesInfo",
+          JSON.stringify(updatedFavorites)
+        )
+        toast.success("Imóvel adicionado aos favoritos")
+      } catch (err) {
+        toast.error("Falha ao adicionar aos favoritos")
+      }
+    }
+  }
+
+  const removeFavorite = (propertyId) => {
+    const updatedFavorites = favoritesProperties.filter(
+      (property) => property.id !== propertyId
+    )
+
+    setFavoritesProperties(updatedFavorites)
+
+    try {
+      localStorage.setItem(
         "trovaoimoveis:favoritesInfo",
         JSON.stringify(updatedFavorites)
       )
+      toast.success("Imóvel removido dos favoritos")
+    } catch (err) {
+      toast.error("Falha ao remover dos favoritos")
     }
   }
 
@@ -36,7 +60,9 @@ export const FavoritesProvider = ({ children }) => {
   }, [])
 
   return (
-    <FavoritesContext.Provider value={{ putFavorites, favoritesProperties }}>
+    <FavoritesContext.Provider
+      value={{ putFavorites, favoritesProperties, removeFavorite }}
+    >
       {children}
     </FavoritesContext.Provider>
   )

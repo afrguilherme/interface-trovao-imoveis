@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { FaTrashAlt } from "react-icons/fa"
 
 export const Container = styled.div`
   height: 100%;
@@ -87,7 +88,8 @@ export const Select = styled.select`
 
 export const FavoritesContent = styled.div`
   width: 100%;
-  height: fit-content;
+  height: 100%;
+  min-height: 280px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -116,6 +118,8 @@ export const FavoriteCard = styled.div`
   border: 1px solid rgba(60, 68, 83, 0.4);
   border-radius: 15px;
   padding: 20px;
+  display: flex;
+  justify-content: space-between;
 
   p {
     color: #3c4453;
@@ -138,5 +142,19 @@ export const FavoriteCard = styled.div`
     width: 100%;
     max-width: 200px;
     border-radius: 20px;
+  }
+`
+
+export const DeleteIcon = styled(FaTrashAlt)`
+  color: #3c4453;
+  font-size: 22px;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 1;
   }
 `
