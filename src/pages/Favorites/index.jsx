@@ -2,6 +2,10 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 import { useUser } from "../../hooks/UserContext.jsx"
+import { useFavorites } from "../../hooks/FavoritesContext.jsx"
+
+import { formatCurrency } from "../../utils/currency.js"
+import { formatDate, formatTime } from "../../utils/dateTime.js"
 
 import {
   Container,
@@ -12,12 +16,16 @@ import {
   FavoriteCount,
   Select,
   FavoritesContent,
+  CardsContainer,
+  FavoriteCard,
 } from "./styles"
 
 function Favorites() {
-  const { putUserData, userData } = useUser()
+  const { userData } = useUser()
+  const { putFavorites, favoritesProperties } = useFavorites()
 
   const [sortOption, setSortOption] = useState("Mais recentes")
+  const [favoriteCount, setFavoriteCount] = useState(0)
 
   const navigate = useNavigate()
 
@@ -26,6 +34,10 @@ function Favorites() {
       navigate("/login")
     }
   }, [userData])
+
+  useEffect(() => {
+    setFavoriteCount(favoritesProperties.length)
+  }, [favoritesProperties])
 
   const handleSortChange = (event) => {
     setSortOption(event.target.value)
@@ -42,16 +54,41 @@ function Favorites() {
           <FavoritesHeader>
             <FavoriteCount>
               <h2>Anúncios Favoritos</h2>
-              <p>(0)</p>
+              <p>({favoriteCount})</p>
             </FavoriteCount>
             <Select value={sortOption} onChange={handleSortChange}>
               <option value="Mais recentes">Mais recentes</option>
               <option value="Menor preço">Menor preço</option>
             </Select>
           </FavoritesHeader>
-          <FavoritesContent>
+          {/* <FavoritesContent>
             <p>Não há anúncios favoritos :(</p>
-          </FavoritesContent>
+          </FavoritesContent> */}
+          <CardsContainer>
+            {favoritesProperties &&
+              favoritesProperties.map((property) => (
+                <FavoriteCard>
+                  <div className="left-section">
+                    <img alt="imagem-imóvel" src={property.url[0]} />
+                    <div className="property-info">
+                      <div>
+                        <p style={{ marginBottom: "10px" }}>{property.name}</p>
+                        <p style={{ color: "#000", fontSize: "18px" }}>
+                          {formatCurrency(property.price)}
+                        </p>
+                      </div>
+                      <div>
+                        <p>{property.neighborhood}</p>
+                        <p style={{ fontSize: "12px", marginTop: "8px" }}>
+                          {formatDate(property.createdAt)} -{" "}
+                          {formatTime(property.createdAt)}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </FavoriteCard>
+              ))}
+          </CardsContainer>
         </FavoritesContainer>
       </Main>
     </Container>

@@ -1,4 +1,5 @@
-import React from "react"
+import { useFavorites } from "../../hooks/FavoritesContext"
+
 import {
   Property,
   NeighborhoodButton,
@@ -6,9 +7,12 @@ import {
   BottomDetails,
 } from "./styles"
 import PropertyDetails from "../PropertyDetails"
+
 import { formatCurrency } from "../../utils/currency"
 
 const PropertyCard = ({ property }) => {
+  const { putFavorites } = useFavorites()
+
   return (
     <Property className="property-div">
       <img src={property.url[0]} alt="ícone do imóvel" />
@@ -21,7 +25,7 @@ const PropertyCard = ({ property }) => {
       />
       <BottomDetails>
         <p>{formatCurrency(property.price)}</p>
-        <FavoriteStyles />
+        <FavoriteStyles onClick={() => putFavorites(property)} />
       </BottomDetails>
     </Property>
   )

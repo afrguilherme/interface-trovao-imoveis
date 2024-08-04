@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom/client"
 
-import { UserProvider } from "./hooks/UserContext.jsx"
+import AppProvider from "./hooks"
 
 import { RouterProvider } from "react-router-dom"
 import router from "./routes.jsx"
@@ -13,8 +13,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <GlobalStyles />
     <Toaster position="bottom-right" />
-    <UserProvider>
+    <AppProvider>
       <RouterProvider router={router} />
-    </UserProvider>
+    </AppProvider>
   </React.StrictMode>
 )
