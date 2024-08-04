@@ -4,6 +4,7 @@ const UserContext = createContext({})
 
 export const UserProvider = ({ children }) => {
   const [userData, setUserData] = useState({})
+  const [loadingUserData, setLoadingUserData] = useState(true)
 
   const putUserData = async (userInfo) => {
     setUserData(userInfo)
@@ -21,12 +22,13 @@ export const UserProvider = ({ children }) => {
       if (clientInfo) {
         setUserData(JSON.parse(clientInfo))
       }
+      setLoadingUserData(false)
     }
     loadUserData()
   }, [])
 
   return (
-    <UserContext.Provider value={{ putUserData, userData }}>
+    <UserContext.Provider value={{ putUserData, userData, loadingUserData }}>
       {children}
     </UserContext.Provider>
   )

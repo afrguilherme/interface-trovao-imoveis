@@ -1,14 +1,20 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import toast, { Toaster } from "react-hot-toast"
 
+import { useUser } from "./UserContext"
+
 const FavoritesContext = createContext({})
 
 export const FavoritesProvider = ({ children }) => {
   const [favoritesProperties, setFavoritesProperties] = useState([])
+  const [favoritesLoaded, setFavoritesLoaded] = useState(false)
+  const { userData, loadingUserData } = useUser()
 
   const putFavorites = async (property) => {
     const storedFavorites =
-      JSON.parse(localStorage.getItem("trovaoimoveis:favoritesInfo")) || []
+      JSON.parse(
+        localStorage.getItem(`trovaoimoveis:favoritesInfo-${userData.id}`)
+      ) || []
 
     const isFavorite = storedFavorites.some((fav) => fav.id === property.id)
 
@@ -17,8 +23,8 @@ export const FavoritesProvider = ({ children }) => {
       setFavoritesProperties(updatedFavorites)
 
       try {
-        await localStorage.setItem(
-          "trovaoimoveis:favoritesInfo",
+        localStorage.setItem(
+          `trovaoimoveis:favoritesInfo-${userData.id}`,
           JSON.stringify(updatedFavorites)
         )
         toast.success("Imóvel adicionado aos favoritos")
@@ -37,7 +43,7 @@ export const FavoritesProvider = ({ children }) => {
 
     try {
       localStorage.setItem(
-        "trovaoimoveis:favoritesInfo",
+        `trovaoimoveis:favoritesInfo-${userData.id}`,
         JSON.stringify(updatedFavorites)
       )
       toast.success("Imóvel removido dos favoritos")
@@ -48,16 +54,34 @@ export const FavoritesProvider = ({ children }) => {
 
   useEffect(() => {
     const loadFavoritesData = async () => {
-      const clientFavoritesData = await localStorage.getItem(
-        "trovaoimoveis:favoritesInfo"
-      )
-
-      if (clientFavoritesData) {
-        setFavoritesProperties(JSON.parse(clientFavoritesData))
+      if (!loadingUserData && userData && userData.id) {
+        const clientFavoritesData = await localStorage.getItem(
+          `trovaoimoveis:favoritesInfo-${userData.id}`
+        )
+        if (clientFavoritesData) {
+          setFavoritesProperties(JSON.parse(clientFavoritesData))
+        } else {
+          setFavoritesProperties([])
+        }
+        setFavoritesLoaded(true)
       }
     }
     loadFavoritesData()
-  }, [])
+  }, [userData, loadingUserData])
+
+  useEffect(() => {
+    if (favoritesLoaded) {
+      const handleStorageChange = (event) => {
+        if (event.key === `trovaoimoveis:favoritesInfo-${userData.id}`) {
+          setFavoritesProperties(JSON.parse(event.newValue) || [])
+        }
+      }
+      window.addEventListener("storage", handleStorageChange)
+      return () => {
+        window.removeEventListener("storage", handleStorageChange)
+      }
+    }
+  }, [favoritesLoaded, userData])
 
   return (
     <FavoritesContext.Provider
