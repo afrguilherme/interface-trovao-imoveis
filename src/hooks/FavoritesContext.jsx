@@ -10,7 +10,16 @@ export const FavoritesProvider = ({ children }) => {
   const [favoritesLoaded, setFavoritesLoaded] = useState(false)
   const { userData, loadingUserData } = useUser()
 
+  const isEmptyObject = (obj) => {
+    return obj && Object.keys(obj).length === 0 && obj.constructor === Object
+  }
+
   const putFavorites = async (property) => {
+    if (!userData || isEmptyObject(userData)) {
+      toast.error("Faça login para favoritar anúncios")
+      return null
+    }
+
     const storedFavorites =
       JSON.parse(
         localStorage.getItem(`trovaoimoveis:favoritesInfo-${userData.id}`)
