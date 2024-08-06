@@ -59,7 +59,7 @@ export const FavoriteStyles = styled(FaHeart)`
   cursor: pointer;
 
   &:hover {
-    opacity: 0.9;
+    opacity: 0.8;
   }
 
   &:active {

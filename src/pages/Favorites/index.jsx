@@ -26,6 +26,7 @@ function Favorites() {
   const { putFavorites, favoritesProperties, removeFavorite } = useFavorites()
 
   const [sortOption, setSortOption] = useState("Mais recentes")
+  const [sortedFavorites, setSortedFavorites] = useState([])
   const [favoriteCount, setFavoriteCount] = useState(0)
 
   const navigate = useNavigate()
@@ -38,11 +39,21 @@ function Favorites() {
 
   useEffect(() => {
     setFavoriteCount(favoritesProperties.length)
-  }, [favoritesProperties])
+    sortFavorites(sortOption)
+  }, [favoritesProperties, sortOption])
 
   const handleSortChange = (event) => {
     setSortOption(event.target.value)
-    //Adicionar restante da lógica de ordenar favoritos aqui.
+  }
+
+  const sortFavorites = (option) => {
+    let sortedArray = [...favoritesProperties]
+    if (option === "Mais recente") {
+      sortedArray.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    } else if (option === "Menor preço") {
+      sortedArray.sort((a, b) => a.price - b.price)
+    }
+    setSortedFavorites(sortedArray)
   }
 
   const deleteFavorite = (propertyId) => {
@@ -62,7 +73,7 @@ function Favorites() {
               <p>({favoriteCount})</p>
             </FavoriteCount>
             <Select value={sortOption} onChange={handleSortChange}>
-              <option value="Mais recentes">Mais recentes</option>
+              <option value="Mais recente">Mais recentes</option>
               <option value="Menor preço">Menor preço</option>
             </Select>
           </FavoritesHeader>
@@ -72,9 +83,9 @@ function Favorites() {
             </FavoritesContent>
           ) : (
             <CardsContainer>
-              {favoritesProperties &&
-                favoritesProperties.map((property) => (
-                  <FavoriteCard>
+              {sortedFavorites &&
+                sortedFavorites.map((property) => (
+                  <FavoriteCard key={property.id}>
                     <div className="left-section">
                       <img alt="imagem-imóvel" src={property.url[0]} />
                       <div className="property-info">
