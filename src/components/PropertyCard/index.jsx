@@ -1,4 +1,7 @@
 import { useFavorites } from "../../hooks/FavoritesContext"
+import { useNavigate } from "react-router-dom"
+
+import { useUser } from "../../hooks/UserContext"
 
 import {
   Property,
@@ -6,14 +9,25 @@ import {
   FavoriteStyles,
   BottomDetails,
 } from "./styles"
+
 import PropertyDetails from "../PropertyDetails"
 
 import { formatCurrency } from "../../utils/currency"
 
 const PropertyCard = ({ property }) => {
-  const { putFavorites, favoritesProperties } = useFavorites()
+  const { putFavorites, favoritesProperties, isEmptyObject } = useFavorites()
+  const { userData } = useUser()
+  const navigate = useNavigate()
 
   const isFavorite = favoritesProperties.some((fav) => fav.id === property.id)
+
+  const handleFavoriteClick = () => {
+    if (!userData || isEmptyObject(userData)) {
+      navigate("/login")
+    } else {
+      putFavorites(property)
+    }
+  }
 
   return (
     <Property className="property-div">
@@ -27,10 +41,7 @@ const PropertyCard = ({ property }) => {
       />
       <BottomDetails>
         <p>{formatCurrency(property.price)}</p>
-        <FavoriteStyles
-          onClick={() => putFavorites(property)}
-          isFavorite={isFavorite}
-        />
+        <FavoriteStyles onClick={handleFavoriteClick} isFavorite={isFavorite} />
       </BottomDetails>
     </Property>
   )
