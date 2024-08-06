@@ -53,13 +53,17 @@ export const NeighborhoodButton = styled.button`
 `
 
 export const FavoriteStyles = styled(FaHeart)`
-  color: #3c4453;
+  color: ${(props) => (props.isFavorite ? "#e00707" : "#3c4453")};
   font-size: 20px;
   border-radius: 5px;
   cursor: pointer;
 
   &:hover {
-    color: #e00707;
+    opacity: 0.9;
+  }
+
+  &:active {
+    opacity: 1;
   }
 `
 

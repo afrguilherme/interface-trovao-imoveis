@@ -18,7 +18,22 @@ export const FavoritesProvider = ({ children }) => {
 
     const isFavorite = storedFavorites.some((fav) => fav.id === property.id)
 
-    if (!isFavorite) {
+    if (isFavorite) {
+      const updatedFavorites = storedFavorites.filter(
+        (fav) => fav.id !== property.id
+      )
+      setFavoritesProperties(updatedFavorites)
+
+      try {
+        localStorage.setItem(
+          `trovaoimoveis:favoritesInfo-${userData.id}`,
+          JSON.stringify(updatedFavorites)
+        )
+        toast.success("Imóvel removido dos favoritos")
+      } catch (err) {
+        toast.error("Falha ao remover dos favoritos")
+      }
+    } else {
       const updatedFavorites = [...storedFavorites, property]
       setFavoritesProperties(updatedFavorites)
 

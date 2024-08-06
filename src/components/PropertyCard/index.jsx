@@ -11,7 +11,9 @@ import PropertyDetails from "../PropertyDetails"
 import { formatCurrency } from "../../utils/currency"
 
 const PropertyCard = ({ property }) => {
-  const { putFavorites } = useFavorites()
+  const { putFavorites, favoritesProperties } = useFavorites()
+
+  const isFavorite = favoritesProperties.some((fav) => fav.id === property.id)
 
   return (
     <Property className="property-div">
@@ -25,7 +27,10 @@ const PropertyCard = ({ property }) => {
       />
       <BottomDetails>
         <p>{formatCurrency(property.price)}</p>
-        <FavoriteStyles onClick={() => putFavorites(property)} />
+        <FavoriteStyles
+          onClick={() => putFavorites(property)}
+          isFavorite={isFavorite}
+        />
       </BottomDetails>
     </Property>
   )
