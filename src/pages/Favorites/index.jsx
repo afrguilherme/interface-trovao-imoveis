@@ -4,9 +4,6 @@ import { useNavigate } from "react-router-dom"
 import { useUser } from "../../hooks/UserContext.jsx"
 import { useFavorites } from "../../hooks/FavoritesContext.jsx"
 
-import { formatCurrency } from "../../utils/currency.js"
-import { formatDate, formatTime } from "../../utils/dateTime.js"
-
 import {
   Container,
   Title,
@@ -17,15 +14,15 @@ import {
   Select,
   FavoritesContent,
   CardsContainer,
-  FavoriteCard,
-  DeleteIcon,
 } from "./styles"
+
+import FavoriteCard from "../../components/FavoriteCard/index.jsx"
 
 function Favorites() {
   const { userData } = useUser()
-  const { putFavorites, favoritesProperties, removeFavorite } = useFavorites()
+  const { favoritesProperties } = useFavorites()
 
-  const [sortOption, setSortOption] = useState("Mais recentes")
+  const [sortOption, setSortOption] = useState("Mais recente")
   const [sortedFavorites, setSortedFavorites] = useState([])
   const [favoriteCount, setFavoriteCount] = useState(0)
 
@@ -37,15 +34,6 @@ function Favorites() {
     }
   }, [userData])
 
-  useEffect(() => {
-    setFavoriteCount(favoritesProperties.length)
-    sortFavorites(sortOption)
-  }, [favoritesProperties, sortOption])
-
-  const handleSortChange = (event) => {
-    setSortOption(event.target.value)
-  }
-
   const sortFavorites = (option) => {
     let sortedArray = [...favoritesProperties]
     if (option === "Mais recente") {
@@ -56,8 +44,13 @@ function Favorites() {
     setSortedFavorites(sortedArray)
   }
 
-  const deleteFavorite = (propertyId) => {
-    removeFavorite(propertyId)
+  useEffect(() => {
+    setFavoriteCount(favoritesProperties.length)
+    sortFavorites(sortOption)
+  }, [sortOption, favoritesProperties])
+
+  const handleSortChange = (event) => {
+    setSortOption(event.target.value)
   }
 
   return (
@@ -73,7 +66,7 @@ function Favorites() {
               <p>({favoriteCount})</p>
             </FavoriteCount>
             <Select value={sortOption} onChange={handleSortChange}>
-              <option value="Mais recente">Mais recentes</option>
+              <option value="Mais recente">Mais recente</option>
               <option value="Menor preço">Menor preço</option>
             </Select>
           </FavoritesHeader>
@@ -85,29 +78,7 @@ function Favorites() {
             <CardsContainer>
               {sortedFavorites &&
                 sortedFavorites.map((property) => (
-                  <FavoriteCard key={property.id}>
-                    <div className="left-section">
-                      <img alt="imagem-imóvel" src={property.url[0]} />
-                      <div className="property-info">
-                        <div>
-                          <p style={{ marginBottom: "10px" }}>
-                            {property.name}
-                          </p>
-                          <p style={{ color: "#000", fontSize: "18px" }}>
-                            {formatCurrency(property.price)}
-                          </p>
-                        </div>
-                        <div>
-                          <p>{property.neighborhood}</p>
-                          <p style={{ fontSize: "12px", marginTop: "8px" }}>
-                            {formatDate(property.createdAt)} -{" "}
-                            {formatTime(property.createdAt)}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <DeleteIcon onClick={() => deleteFavorite(property.id)} />
-                  </FavoriteCard>
+                  <FavoriteCard property={property} key={property.id} />
                 ))}
             </CardsContainer>
           )}

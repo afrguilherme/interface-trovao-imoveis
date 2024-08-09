@@ -76,6 +76,10 @@ export const FavoritesProvider = ({ children }) => {
     }
   }
 
+  const isFavorite = (propertyId) => {
+    return favoritesProperties.some((property) => property.id === propertyId)
+  }
+
   useEffect(() => {
     const loadFavoritesData = async () => {
       if (!loadingUserData && userData && userData.id) {
@@ -114,6 +118,7 @@ export const FavoritesProvider = ({ children }) => {
         favoritesProperties,
         removeFavorite,
         isEmptyObject,
+        isFavorite,
       }}
     >
       {children}
