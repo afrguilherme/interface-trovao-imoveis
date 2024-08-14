@@ -53,6 +53,7 @@ export const RegisterOption = styled.p`
 
 export const Logo = styled.div`
   button {
+    background: transparent;
     border: none;
     outline: none;
   }

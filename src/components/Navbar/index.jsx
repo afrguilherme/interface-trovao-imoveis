@@ -70,7 +70,7 @@ const Navbar = () => {
       <SearchBar>
         <SearchInput
           type="text"
-          placeholder="Cidade, bairro, endereço..."
+          placeholder="Bairro, endereço, condomínio..."
           value={searchQuery}
           onChange={(data) => setSearchQuery(data.target.value)}
           onKeyPress={handleKeyPress}

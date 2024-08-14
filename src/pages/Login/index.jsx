@@ -67,14 +67,13 @@ function Login() {
       )
 
       if (status === 200) {
+        putUserData(data)
         toast.success("Seja bem vindo!")
       } else if (status === 401) {
         toast.error("Dados incorretos")
       } else {
         throw new Error()
       }
-
-      putUserData(data)
     } catch (err) {
       toast.error("Falha no sistema")
     }
