@@ -6,23 +6,30 @@ export const CarouselStyles = styled(Carousel)`
   padding: 60px 20px;
   display: flex;
 
-  .VscMY {
-    background-color: rgba(5, 134, 144, 30%);
+  .kGEMly {
+    box-shadow: 0 0 1px 3px rgba(5, 134, 144, 1);
+    background-color: transparent;
   }
 
-  .cYiiyC {
-    color: #058690;
-
+  .fGgIWm {
     &:hover {
-      background-color: #058690;
+      background-color: transparent;
+      color: #058690;
     }
   }
 
-  .gcIOjI:disabled {
-    cursor: default;
+  .fGgIWm {
+    color: #058690;
   }
 
-  .sc-imWZod {
-    box-shadow: 0 0 1px 3px rgba(5, 134, 144, 1);
+  .gaYOat {
+    &:hover {
+      background-color: transparent;
+      box-shadow: 0 0 1px 3px rgba(5, 134, 144, 1);
+    }
+  }
+
+  .iKHoHs:disabled {
+    cursor: default;
   }
 `

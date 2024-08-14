@@ -2,12 +2,9 @@ import api from "../../services/api"
 import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 
-import {
-  Container,
-  Aside,
-  PropertiesContainer,
-  FilterContainer,
-} from "./styles"
+import { Container, PropertiesContainer } from "./styles"
+
+import AsideFilter from "../../components/AsideFilter"
 
 import PropertyCard from "../../components/PropertyCard"
 
@@ -41,9 +38,7 @@ function Properties() {
   return (
     <>
       <Container>
-        <Aside>
-          <FilterContainer></FilterContainer>
-        </Aside>
+        <AsideFilter />
         <PropertiesContainer>
           {filteredProperties &&
             filteredProperties.map((property) => (
