@@ -32,7 +32,8 @@ function Properties() {
         property.address.toLowerCase().includes(query.toLowerCase()) ||
         property.neighborhood.toLowerCase().includes(query.toLowerCase()) ||
         property.town_house.toLowerCase().includes(query.toLowerCase()) ||
-        property.status.toLowerCase().includes(query.toLowerCase())
+        property.status.toLowerCase().includes(query.toLowerCase()) ||
+        property.description.toLowerCase().includes(query.toLowerCase())
     )
     setFilteredProperties(filtered)
   }, [properties, searchParams])

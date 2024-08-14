@@ -82,6 +82,10 @@ export const FavoritesProvider = ({ children }) => {
 
   useEffect(() => {
     const loadFavoritesData = async () => {
+      if (!favoritesProperties || isEmptyObject(favoritesProperties)) {
+        return null
+      }
+
       if (!loadingUserData && userData && userData.id) {
         const clientFavoritesData = await localStorage.getItem(
           `trovaoimoveis:favoritesInfo-${userData.id}`
@@ -119,6 +123,7 @@ export const FavoritesProvider = ({ children }) => {
         removeFavorite,
         isEmptyObject,
         isFavorite,
+        setFavoritesProperties,
       }}
     >
       {children}

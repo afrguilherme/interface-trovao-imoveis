@@ -13,13 +13,35 @@ import {
 import PropertyDetails from "../PropertyDetails"
 
 import { formatCurrency } from "../../utils/currency"
+import { useEffect } from "react"
 
 const PropertyCard = ({ property }) => {
-  const { putFavorites, favoritesProperties, isEmptyObject } = useFavorites()
+  const {
+    putFavorites,
+    favoritesProperties,
+    isEmptyObject,
+    setFavoritesProperties,
+  } = useFavorites()
   const { userData } = useUser()
   const navigate = useNavigate()
 
-  const isFavorite = favoritesProperties.some((fav) => fav.id === property.id)
+  const isFavorite =
+    Array.isArray(favoritesProperties) &&
+    favoritesProperties.some((fav) => fav.id === property.id)
+
+  useEffect(() => {
+    const FavoritesRefresh = () => {
+      if (!userData || isEmptyObject(userData)) {
+        setFavoritesProperties({})
+      } else {
+        const storedFavorites = JSON.parse(
+          localStorage.getItem(`trovaoimoveis:favoritesInfo-${userData.id}`)
+        )
+        setFavoritesProperties(storedFavorites)
+      }
+    }
+    FavoritesRefresh()
+  }, [userData])
 
   const handleFavoriteClick = () => {
     if (!userData || isEmptyObject(userData)) {
