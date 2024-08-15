@@ -1,22 +1,31 @@
 import {
   Container,
   FilterContainer,
-  TypeContainer,
+  TypeSection,
   Title,
   ContainerDetails,
   CountSection,
   CountButton,
   DetailsSection,
+  ValueSection,
+  ValuesWrap,
+  ValueDetail,
 } from "./styles"
 
+import { formatInputCurrency } from "../../utils/currency"
+
 const AsideFilter = () => {
+  const handleInputChange = (event) => {
+    event.target.value = formatInputCurrency(event.target.value)
+  }
+
   return (
     <Container>
       <FilterContainer>
-        <TypeContainer>
+        <TypeSection>
           <Title>Tipo de imóvel</Title>
           <select></select>
-        </TypeContainer>
+        </TypeSection>
         <ContainerDetails>
           <DetailsSection>
             <Title>Quartos</Title>
@@ -46,6 +55,27 @@ const AsideFilter = () => {
             </CountSection>
           </DetailsSection>
         </ContainerDetails>
+        <ValueSection>
+          <Title>Valor</Title>
+          <ValuesWrap>
+            <ValueDetail>
+              <Title>Mínimo</Title>
+              <input
+                placeholder="R$ 0,00"
+                type="text"
+                onChange={handleInputChange}
+              />
+            </ValueDetail>
+            <ValueDetail>
+              <Title>Máximo</Title>
+              <input
+                placeholder="R$ 0,00"
+                type="text"
+                onChange={handleInputChange}
+              />
+            </ValueDetail>
+          </ValuesWrap>
+        </ValueSection>
       </FilterContainer>
     </Container>
   )

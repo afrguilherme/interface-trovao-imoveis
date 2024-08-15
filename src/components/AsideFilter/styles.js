@@ -24,7 +24,7 @@ export const Title = styled.div`
   color: #3c4453;
 `
 
-export const TypeContainer = styled.div`
+export const TypeSection = styled.div`
   width: 100%;
   padding-bottom: 30px;
   border-bottom: 1px solid rgba(60, 68, 83, 0.4);
@@ -77,4 +77,33 @@ export const CountButton = styled.button`
 
 export const DetailsSection = styled.div`
   margin-bottom: 20px;
+`
+
+export const ValueSection = styled.div`
+  margin-top: 20px;
+  width: 100%;
+  padding-bottom: 30px;
+  border-bottom: 1px solid rgba(60, 68, 83, 0.4);
+`
+
+export const ValuesWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+export const ValueDetail = styled.div`
+  input {
+    width: 100%;
+    max-width: 80%;
+    padding: 8px 0;
+    border-radius: 10px;
+    border: 1px solid rgba(60, 68, 83, 0.8);
+    outline: none;
+    padding-left: 10px;
+    font-size: 16px;
+  }
+
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
 `
