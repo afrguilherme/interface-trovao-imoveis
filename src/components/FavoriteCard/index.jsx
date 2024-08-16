@@ -1,4 +1,4 @@
-import { formatCurrency } from "../../utils/currency"
+import { formatCurrency } from "../../utils/formatUtils"
 import { formatDate, formatTime } from "../../utils/dateTime"
 import { StyleFavoriteCard, DeleteIcon } from "./styles"
 

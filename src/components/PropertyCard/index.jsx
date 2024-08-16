@@ -12,7 +12,7 @@ import {
 
 import PropertyDetails from "../PropertyDetails"
 
-import { formatCurrency } from "../../utils/currency"
+import { formatCurrency } from "../../utils/formatUtils"
 import { useEffect } from "react"
 
 const PropertyCard = ({ property }) => {

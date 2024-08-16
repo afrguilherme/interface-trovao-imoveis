@@ -1,7 +1,7 @@
 import {
   Container,
   FilterContainer,
-  TypeSection,
+  SelectSection,
   Title,
   ContainerDetails,
   CountSection,
@@ -10,22 +10,24 @@ import {
   ValueSection,
   ValuesWrap,
   ValueDetail,
+  CheckboxSection,
 } from "./styles"
 
-import { formatInputCurrency } from "../../utils/currency"
+import { formatInputCurrency } from "../../utils/formatUtils"
 
 const AsideFilter = () => {
-  const handleInputChange = (event) => {
+  const handleInputValue = (event) => {
     event.target.value = formatInputCurrency(event.target.value)
   }
 
   return (
     <Container>
       <FilterContainer>
-        <TypeSection>
+        <SelectSection>
           <Title>Tipo de imóvel</Title>
           <select></select>
-        </TypeSection>
+        </SelectSection>
+
         <ContainerDetails>
           <DetailsSection>
             <Title>Quartos</Title>
@@ -36,6 +38,7 @@ const AsideFilter = () => {
               <CountButton>4 +</CountButton>
             </CountSection>
           </DetailsSection>
+
           <DetailsSection>
             <Title>Banheiros</Title>
             <CountSection>
@@ -45,6 +48,7 @@ const AsideFilter = () => {
               <CountButton>4 +</CountButton>
             </CountSection>
           </DetailsSection>
+
           <DetailsSection>
             <Title>Vagas</Title>
             <CountSection>
@@ -55,6 +59,7 @@ const AsideFilter = () => {
             </CountSection>
           </DetailsSection>
         </ContainerDetails>
+
         <ValueSection>
           <Title>Valor</Title>
           <ValuesWrap>
@@ -63,7 +68,7 @@ const AsideFilter = () => {
               <input
                 placeholder="R$ 0,00"
                 type="text"
-                onChange={handleInputChange}
+                onChange={handleInputValue}
               />
             </ValueDetail>
             <ValueDetail>
@@ -71,11 +76,45 @@ const AsideFilter = () => {
               <input
                 placeholder="R$ 0,00"
                 type="text"
-                onChange={handleInputChange}
+                onChange={handleInputValue}
               />
             </ValueDetail>
           </ValuesWrap>
         </ValueSection>
+
+        <ValueSection style={{ border: "none" }}>
+          <Title>Área do imóvel</Title>
+          <ValuesWrap>
+            <ValueDetail>
+              <Title>Mínimo</Title>
+              <input placeholder="0 m²" type="number"></input>
+            </ValueDetail>
+            <ValueDetail>
+              <Title>Máximo</Title>
+              <input placeholder="0 m²" type="number"></input>
+            </ValueDetail>
+          </ValuesWrap>
+        </ValueSection>
+
+        <SelectSection>
+          <Title>Status do imóvel</Title>
+          <select></select>
+        </SelectSection>
+
+        <SelectSection style={{ border: "none", marginTop: "20px" }}>
+          <Title>Bairro</Title>
+          <select></select>
+        </SelectSection>
+
+        <SelectSection style={{ border: "none" }}>
+          <Title>Condomínio</Title>
+          <select></select>
+        </SelectSection>
+
+        <CheckboxSection>
+          <input type="checkbox" />
+          <Title>Imóveis em oferta</Title>
+        </CheckboxSection>
       </FilterContainer>
     </Container>
   )
