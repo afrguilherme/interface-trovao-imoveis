@@ -90,8 +90,8 @@ const Navbar = () => {
             <FavoritesIcon onClick={() => navigate("/favoritos")} />
           </Favorites>
           <UserInfo>
-            <UserIcon />
-            <p>{userData.name}</p>
+            <UserIcon className="userStyles" />
+            <p className="userStyles">{userData.name}</p>
           </UserInfo>
           <Logout onClick={showLogoutModal}>Sair</Logout>
         </UserRightSection>

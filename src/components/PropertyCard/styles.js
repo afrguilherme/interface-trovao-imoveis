@@ -18,16 +18,16 @@ export const Property = styled.div`
     width: 100%;
     border-radius: 20px;
     cursor: pointer;
-
-    &:hover {
-      opacity: 0.9;
-    }
   }
 
   h3 {
     margin-top: 5px;
     color: #3c4453;
     cursor: pointer;
+  }
+
+  &:hover {
+    opacity: 0.9;
   }
 `
 

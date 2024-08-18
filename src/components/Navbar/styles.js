@@ -111,11 +111,6 @@ export const FavoritesIcon = styled(FaHeart)`
 
 export const UserIcon = styled(FaUser)`
   font-size: 20px;
-  cursor: pointer;
-
-  &:hover {
-    color: #058690;
-  }
 `
 
 export const UserInfo = styled.div`
@@ -128,11 +123,10 @@ export const UserInfo = styled.div`
   color: #3c4453;
   border-left: 1px solid #3c4453;
   padding-left: 40px;
+  cursor: pointer;
 
-  p {
-    cursor: pointer;
-
-    &:hover {
+  &:hover {
+    .userStyles {
       color: #058690;
     }
   }

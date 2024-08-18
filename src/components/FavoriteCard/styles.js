@@ -10,6 +10,7 @@ export const StyleFavoriteCard = styled.div`
   padding: 20px;
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
 
   p {
     color: #3c4453;
@@ -32,6 +33,10 @@ export const StyleFavoriteCard = styled.div`
     width: 100%;
     max-width: 200px;
     border-radius: 20px;
+  }
+
+  &:hover {
+    opacity: 0.9;
   }
 `
 

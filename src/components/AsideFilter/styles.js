@@ -113,7 +113,8 @@ export const CheckboxSection = styled.div`
   display: flex;
 
   input {
-    margin-right: 10px;
+    margin: 0 15px 0 5px;
+    scale: 1.4;
   }
 
   p {
