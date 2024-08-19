@@ -1,12 +1,8 @@
 import {
   Container,
   FilterContainer,
-  SelectSection,
   Title,
   ContainerDetails,
-  CountSection,
-  CountButton,
-  DetailsSection,
   ValueSection,
   ValuesWrap,
   ValueDetail,
@@ -14,6 +10,9 @@ import {
 } from "./styles"
 
 import { formatInputCurrency } from "../../utils/formatUtils"
+
+import SelectSection from "../SelectSection"
+import CountSection from "../CountSection"
 
 const AsideFilter = () => {
   const handleInputValue = (event) => {
@@ -23,41 +22,14 @@ const AsideFilter = () => {
   return (
     <Container>
       <FilterContainer>
-        <SelectSection>
-          <Title>Tipo de imóvel</Title>
+        <SelectSection title="Tipo de imóvel">
           <select></select>
         </SelectSection>
 
         <ContainerDetails>
-          <DetailsSection>
-            <Title>Quartos</Title>
-            <CountSection>
-              <CountButton>1</CountButton>
-              <CountButton>2</CountButton>
-              <CountButton>3</CountButton>
-              <CountButton>4 +</CountButton>
-            </CountSection>
-          </DetailsSection>
-
-          <DetailsSection>
-            <Title>Banheiros</Title>
-            <CountSection>
-              <CountButton>1</CountButton>
-              <CountButton>2</CountButton>
-              <CountButton>3</CountButton>
-              <CountButton>4 +</CountButton>
-            </CountSection>
-          </DetailsSection>
-
-          <DetailsSection>
-            <Title>Vagas</Title>
-            <CountSection>
-              <CountButton>1</CountButton>
-              <CountButton>2</CountButton>
-              <CountButton>3</CountButton>
-              <CountButton>4 +</CountButton>
-            </CountSection>
-          </DetailsSection>
+          <CountSection title="Quartos" />
+          <CountSection title="Banheiros" />
+          <CountSection title="Vagas" />
         </ContainerDetails>
 
         <ValueSection>
@@ -96,18 +68,18 @@ const AsideFilter = () => {
           </ValuesWrap>
         </ValueSection>
 
-        <SelectSection>
-          <Title>Status do imóvel</Title>
+        <SelectSection title={"Status do imóvel"}>
           <select></select>
         </SelectSection>
 
-        <SelectSection style={{ border: "none", marginTop: "20px" }}>
-          <Title>Bairro</Title>
+        <SelectSection
+          title={"Bairro"}
+          style={{ border: "none", marginTop: "20px" }}
+        >
           <select></select>
         </SelectSection>
 
-        <SelectSection style={{ border: "none" }}>
-          <Title>Condomínio</Title>
+        <SelectSection title={"Condomínio"} style={{ border: "none" }}>
           <select></select>
         </SelectSection>
 
