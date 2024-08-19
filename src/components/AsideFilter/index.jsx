@@ -1,3 +1,7 @@
+import { useState, useEffect } from "react"
+
+import api from "../../services/api"
+
 import {
   Container,
   FilterContainer,
@@ -9,12 +13,26 @@ import {
   CheckboxSection,
 } from "./styles"
 
-import { formatInputCurrency } from "../../utils/formatUtils"
-
 import SelectSection from "../SelectSection"
 import CountSection from "../CountSection"
 
+import { formatInputCurrency } from "../../utils/formatUtils"
+
 const AsideFilter = () => {
+  const [categories, setCategories] = useState([])
+
+  useEffect(() => {
+    async function getCategories() {
+      try {
+        const { data } = await api.get("/categories")
+        setCategories(data)
+      } catch (error) {
+        console.error("Erro ao buscar categorias:", error)
+      }
+    }
+    getCategories()
+  }, [])
+
   const handleInputValue = (event) => {
     event.target.value = formatInputCurrency(event.target.value)
   }
@@ -23,7 +41,13 @@ const AsideFilter = () => {
     <Container>
       <FilterContainer>
         <SelectSection title="Tipo de imóvel">
-          <select></select>
+          <select>
+            {categories.map((category) => (
+              <option key={category.id} value={category.name}>
+                {category.name}
+              </option>
+            ))}
+          </select>
         </SelectSection>
 
         <ContainerDetails>

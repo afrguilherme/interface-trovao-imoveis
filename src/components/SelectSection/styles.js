@@ -7,10 +7,13 @@ export const Container = styled.div`
 
   select {
     width: 100%;
-    padding: 8px 0;
+    padding: 8px 0 8px 10px;
     color: #3c4453;
     outline: none;
     border-radius: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #3c4453;
     cursor: pointer;
   }
 `
