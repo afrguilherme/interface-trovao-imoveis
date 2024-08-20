@@ -17,6 +17,7 @@ import SelectSection from "../SelectSection"
 import CountSection from "../CountSection"
 
 import { formatInputCurrency } from "../../utils/formatUtils"
+import { selectData } from "../../utils/selectOptionsData"
 
 const AsideFilter = () => {
   const [categories, setCategories] = useState([])
@@ -25,51 +26,17 @@ const AsideFilter = () => {
   const [townHouses, setTownHouses] = useState([])
 
   useEffect(() => {
-    async function getCategories() {
-      const { data } = await api.get("/categories")
-      setCategories([{ id: "all", name: "Todos" }, ...data])
+    const loadFilterData = async () => {
+      const { categories, neighborhoods, propertyStatus, townHouses } =
+        await selectData()
+
+      setCategories(categories)
+      setNeighborhoods(neighborhoods)
+      setPropertyStatus(propertyStatus)
+      setTownHouses(townHouses)
     }
-    getCategories()
-  }, [])
 
-  useEffect(() => {
-    const getNeighborhood = async () => {
-      const { data } = await api.get("/properties")
-
-      const uniqueNeighborhood = Array.from(
-        new Set(data.map((property) => property.neighborhood))
-      )
-
-      setNeighborhoods(["Todos", ...uniqueNeighborhood])
-    }
-    getNeighborhood()
-  }, [])
-
-  useEffect(() => {
-    const getStatus = async () => {
-      const { data } = await api.get("/properties")
-
-      const uniqueStatus = Array.from(
-        new Set(data.map((property) => property.status))
-      )
-
-      setPropertyStatus(["Todos", ...uniqueStatus])
-    }
-    getStatus()
-  }, [])
-
-  useEffect(() => {
-    const getTownHouse = async () => {
-      const { data } = await api.get("/properties")
-
-      const uniqueTownHouse = Array.from(
-        new Set(data.map((property) => property.town_house))
-      )
-
-      setTownHouses(["Todos", ...uniqueTownHouse])
-    }
-    getTownHouse()
-    console.log(townHouses)
+    loadFilterData()
   }, [])
 
   const handleInputValue = (event) => {
@@ -88,13 +55,11 @@ const AsideFilter = () => {
             ))}
           </select>
         </SelectSection>
-
         <ContainerDetails>
           <CountSection title="Quartos" />
           <CountSection title="Banheiros" />
           <CountSection title="Vagas" />
         </ContainerDetails>
-
         <ValueSection>
           <Title>Valor</Title>
           <ValuesWrap>
@@ -116,7 +81,6 @@ const AsideFilter = () => {
             </ValueDetail>
           </ValuesWrap>
         </ValueSection>
-
         <ValueSection style={{ border: "none" }}>
           <Title>Área do imóvel</Title>
           <ValuesWrap>
@@ -130,7 +94,6 @@ const AsideFilter = () => {
             </ValueDetail>
           </ValuesWrap>
         </ValueSection>
-
         <SelectSection title={"Status do imóvel"}>
           <select>
             {propertyStatus.map((status) => (
@@ -140,7 +103,6 @@ const AsideFilter = () => {
             ))}
           </select>
         </SelectSection>
-
         <SelectSection
           title={"Bairro"}
           style={{ border: "none", marginTop: "20px" }}
@@ -153,7 +115,6 @@ const AsideFilter = () => {
             ))}
           </select>
         </SelectSection>
-
         <SelectSection title={"Condomínio"} style={{ border: "none" }}>
           <select>
             {townHouses.map((townHouse) => (
@@ -163,7 +124,6 @@ const AsideFilter = () => {
             ))}
           </select>
         </SelectSection>
-
         <CheckboxSection>
           <input type="checkbox" />
           <Title>Imóveis em oferta</Title>
