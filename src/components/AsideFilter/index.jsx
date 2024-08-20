@@ -20,17 +20,56 @@ import { formatInputCurrency } from "../../utils/formatUtils"
 
 const AsideFilter = () => {
   const [categories, setCategories] = useState([])
+  const [neighborhoods, setNeighborhoods] = useState([])
+  const [propertyStatus, setPropertyStatus] = useState([])
+  const [townHouses, setTownHouses] = useState([])
 
   useEffect(() => {
     async function getCategories() {
-      try {
-        const { data } = await api.get("/categories")
-        setCategories(data)
-      } catch (error) {
-        console.error("Erro ao buscar categorias:", error)
-      }
+      const { data } = await api.get("/categories")
+      setCategories([{ id: "all", name: "Todos" }, ...data])
     }
     getCategories()
+  }, [])
+
+  useEffect(() => {
+    const getNeighborhood = async () => {
+      const { data } = await api.get("/properties")
+
+      const uniqueNeighborhood = Array.from(
+        new Set(data.map((property) => property.neighborhood))
+      )
+
+      setNeighborhoods(["Todos", ...uniqueNeighborhood])
+    }
+    getNeighborhood()
+  }, [])
+
+  useEffect(() => {
+    const getStatus = async () => {
+      const { data } = await api.get("/properties")
+
+      const uniqueStatus = Array.from(
+        new Set(data.map((property) => property.status))
+      )
+
+      setPropertyStatus(["Todos", ...uniqueStatus])
+    }
+    getStatus()
+  }, [])
+
+  useEffect(() => {
+    const getTownHouse = async () => {
+      const { data } = await api.get("/properties")
+
+      const uniqueTownHouse = Array.from(
+        new Set(data.map((property) => property.town_house))
+      )
+
+      setTownHouses(["Todos", ...uniqueTownHouse])
+    }
+    getTownHouse()
+    console.log(townHouses)
   }, [])
 
   const handleInputValue = (event) => {
@@ -93,18 +132,36 @@ const AsideFilter = () => {
         </ValueSection>
 
         <SelectSection title={"Status do imóvel"}>
-          <select></select>
+          <select>
+            {propertyStatus.map((status) => (
+              <option key={status.index} value={status}>
+                {status}
+              </option>
+            ))}
+          </select>
         </SelectSection>
 
         <SelectSection
           title={"Bairro"}
           style={{ border: "none", marginTop: "20px" }}
         >
-          <select></select>
+          <select>
+            {neighborhoods.map((neighborhood) => (
+              <option key={neighborhood.index} value={neighborhood}>
+                {neighborhood}
+              </option>
+            ))}
+          </select>
         </SelectSection>
 
         <SelectSection title={"Condomínio"} style={{ border: "none" }}>
-          <select></select>
+          <select>
+            {townHouses.map((townHouse) => (
+              <option key={townHouse.index} value={townHouse}>
+                {townHouse}
+              </option>
+            ))}
+          </select>
         </SelectSection>
 
         <CheckboxSection>
