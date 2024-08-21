@@ -42,7 +42,11 @@ function Properties() {
         <PropertiesContainer>
           {filteredProperties &&
             filteredProperties.map((property) => (
-              <PropertyCard key={property.id} property={property} />
+              <PropertyCard
+                style={{ maxHeight: "450px" }}
+                key={property.id}
+                property={property}
+              />
             ))}
         </PropertiesContainer>
       </Container>
