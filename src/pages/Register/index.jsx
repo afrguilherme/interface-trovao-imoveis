@@ -31,6 +31,8 @@ import { useUser } from "../../hooks/UserContext.jsx"
 function Register() {
   const { userData, putUserData } = useUser()
 
+  const navigate = useNavigate()
+
   useEffect(() => {
     if (userData && Object.keys(userData).length > 0) {
       navigate("/")
@@ -74,6 +76,9 @@ function Register() {
 
       if (status === 201 || status === 200) {
         toast.success("Usuário cadastrado com sucesso")
+        setTimeout(() => {
+          navigate("/login")
+        }, 2000)
       } else if (status === 409) {
         toast.error("Este email já está cadastrado")
       } else {
@@ -83,8 +88,6 @@ function Register() {
       toast.error("Falha no sistema")
     }
   }
-
-  const navigate = useNavigate()
 
   return (
     <Container>
