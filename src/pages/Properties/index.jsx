@@ -38,17 +38,17 @@ function Properties() {
   const handleFilter = (filters) => {
     const filtered = properties.filter((property) => {
       const matchesCategory =
-        filters.category && filters.category !== "all"
+        filters.category && filters.category !== "Todos"
           ? property.category.id == filters.category
           : true
       const matchesBedrooms = filters.bedrooms
-        ? property.rooms === parseInt(filters.bedrooms)
+        ? property.rooms >= parseInt(filters.bedrooms)
         : true
       const matchesBathrooms = filters.bathrooms
-        ? property.bathrooms === parseInt(filters.bathrooms)
+        ? property.bathrooms >= parseInt(filters.bathrooms)
         : true
       const matchesParking = filters.parking
-        ? property.parking_space === parseInt(filters.parking)
+        ? property.parking_space >= parseInt(filters.parking)
         : true
       const matchesMinPrice = filters.minPrice
         ? property.price >=
@@ -95,19 +95,19 @@ function Properties() {
           parseInt(filters.maxArea)
         : true
       const matchesStatus =
-        filters.status && filters.status !== "all"
+        filters.status && filters.status !== "Todos"
           ? property.status === filters.status
           : true
       const matchesNeighborhood =
-        filters.neighborhood && filters.neighborhood !== "all"
+        filters.neighborhood && filters.neighborhood !== "Todos"
           ? property.neighborhood === filters.neighborhood
           : true
       const matchesTownHouse =
-        filters.townHouse && filters.townHouse !== "all"
+        filters.townHouse && filters.townHouse !== "Todos"
           ? property.town_house === filters.townHouse
           : true
       const matchesIsOffer = filters.isOffer
-        ? property.isOffer === filters.isOffer
+        ? property.offer === filters.isOffer
         : true
 
       return (

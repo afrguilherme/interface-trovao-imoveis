@@ -9,7 +9,7 @@ export const selectData = async () => {
     propertiesRequest,
   ])
 
-  const categories = [{ id: "all", name: "Todos" }, ...categoriesResponse.data]
+  const categories = [{ name: "Todos" }, ...categoriesResponse.data]
 
   const neighborhoods = Array.from(
     new Set(propertiesResponse.data.map((property) => property.neighborhood))

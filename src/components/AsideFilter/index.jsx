@@ -42,6 +42,8 @@ const AsideFilter = ({ onFilter }) => {
   const [selectedTownHouse, setSelectedTownHouse] = useState("")
   const [isOffer, setIsOffer] = useState(false)
 
+  const [filtersCleared, setFiltersCleared] = useState(false)
+
   useEffect(() => {
     const loadFilterData = async () => {
       const { categories, neighborhoods, propertyStatus, townHouses } =
@@ -78,6 +80,43 @@ const AsideFilter = ({ onFilter }) => {
     onFilter(filters)
     console.log(filters)
   }
+
+  const handleClearFilters = () => {
+    setSelectedCategory("")
+    setSelectedBedrooms("")
+    setSelectedBathrooms("")
+    setSelectedParking("")
+    setMinPrice("")
+    setMaxPrice("")
+    setMinArea("")
+    setMaxArea("")
+    setSelectedStatus("")
+    setSelectedNeighborhood("")
+    setSelectedTownHouse("")
+    setIsOffer(false)
+    setFiltersCleared(true)
+  }
+
+  useEffect(() => {
+    if (filtersCleared) {
+      handleFilter()
+      setFiltersCleared(false)
+    }
+  }, [
+    selectedCategory,
+    selectedBedrooms,
+    selectedBathrooms,
+    selectedParking,
+    minPrice,
+    maxPrice,
+    minArea,
+    maxArea,
+    selectedStatus,
+    selectedNeighborhood,
+    selectedTownHouse,
+    isOffer,
+    filtersCleared,
+  ])
 
   return (
     <Container>
@@ -211,7 +250,7 @@ const AsideFilter = ({ onFilter }) => {
           </CheckboxSection>
         </FilterWrap>
         <ButtonsSection>
-          <DefaultButton>Limpar</DefaultButton>
+          <DefaultButton onClick={handleClearFilters}>Limpar</DefaultButton>
           <DefaultButton $primary onClick={handleFilter}>
             Buscar Imóveis
           </DefaultButton>
