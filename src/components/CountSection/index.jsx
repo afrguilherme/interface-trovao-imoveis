@@ -1,6 +1,6 @@
 import { DetailsSection, OptionsWrap, CountButton, Title } from "./styles"
 
-const CountSection = ({ title }) => {
+const CountSection = ({ title, selectedValue, onSelect }) => {
   const countOptions = ["1", "2", "3", "4 +"]
 
   return (
@@ -8,7 +8,13 @@ const CountSection = ({ title }) => {
       <Title>{title}</Title>
       <OptionsWrap>
         {countOptions.map((option, index) => (
-          <CountButton key={index}>{option}</CountButton>
+          <CountButton
+            key={index}
+            onClick={() => onSelect(option)}
+            selected={selectedValue === option}
+          >
+            {option}
+          </CountButton>
         ))}
       </OptionsWrap>
     </DetailsSection>

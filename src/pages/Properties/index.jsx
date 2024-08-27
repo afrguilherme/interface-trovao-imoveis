@@ -35,10 +35,104 @@ function Properties() {
     setFilteredProperties(filtered)
   }, [properties, searchParams])
 
+  const handleFilter = (filters) => {
+    const filtered = properties.filter((property) => {
+      const matchesCategory =
+        filters.category && filters.category !== "all"
+          ? property.category.id == filters.category
+          : true
+      const matchesBedrooms = filters.bedrooms
+        ? property.rooms === parseInt(filters.bedrooms)
+        : true
+      const matchesBathrooms = filters.bathrooms
+        ? property.bathrooms === parseInt(filters.bathrooms)
+        : true
+      const matchesParking = filters.parking
+        ? property.parking_space === parseInt(filters.parking)
+        : true
+      const matchesMinPrice = filters.minPrice
+        ? property.price >=
+          parseInt(
+            filters.minPrice
+              .replace("R$", "")
+              .replace(/\./g, "")
+              .replace(",", ".")
+              .trim()
+          )
+        : true
+      const matchesMaxPrice =
+        filters.maxPrice &&
+        (!filters.minPrice ||
+          parseInt(
+            filters.maxPrice
+              .replace("R$", "")
+              .replace(/\./g, "")
+              .replace(",", ".")
+              .trim()
+          ) >=
+            parseInt(
+              filters.minPrice
+                .replace("R$", "")
+                .replace(/\./g, "")
+                .replace(",", ".")
+                .trim()
+            ))
+          ? property.price <=
+            parseInt(
+              filters.maxPrice
+                .replace("R$", "")
+                .replace(/\./g, "")
+                .replace(",", ".")
+                .trim()
+            )
+          : true
+      const matchesMinArea = filters.minArea
+        ? parseInt(property.dimensions.replace("m²", "").trim()) >=
+          parseInt(filters.minArea)
+        : true
+      const matchesMaxArea = filters.maxArea
+        ? parseInt(property.dimensions.replace("m²", "").trim()) <=
+          parseInt(filters.maxArea)
+        : true
+      const matchesStatus =
+        filters.status && filters.status !== "all"
+          ? property.status === filters.status
+          : true
+      const matchesNeighborhood =
+        filters.neighborhood && filters.neighborhood !== "all"
+          ? property.neighborhood === filters.neighborhood
+          : true
+      const matchesTownHouse =
+        filters.townHouse && filters.townHouse !== "all"
+          ? property.town_house === filters.townHouse
+          : true
+      const matchesIsOffer = filters.isOffer
+        ? property.isOffer === filters.isOffer
+        : true
+
+      return (
+        matchesCategory &&
+        matchesBedrooms &&
+        matchesBathrooms &&
+        matchesParking &&
+        matchesMinPrice &&
+        matchesMaxPrice &&
+        matchesMinArea &&
+        matchesMaxArea &&
+        matchesStatus &&
+        matchesNeighborhood &&
+        matchesTownHouse &&
+        matchesIsOffer
+      )
+    })
+
+    setFilteredProperties(filtered)
+  }
+
   return (
     <>
       <Container>
-        <AsideFilter />
+        <AsideFilter onFilter={handleFilter} />
         <PropertiesContainer>
           {filteredProperties &&
             filteredProperties.map((property) => (
