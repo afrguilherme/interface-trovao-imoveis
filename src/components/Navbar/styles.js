@@ -71,9 +71,10 @@ export const Links = styled.div`
 `
 
 export const NavLink = styled.a`
-  color: #3c4453;
+  color: ${({ active }) => (active ? "#058690" : "#3c4453")};
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, border-bottom 0s ease;
+  padding-bottom: 3px;
 
   &:hover {
     color: #058690;
@@ -100,7 +101,7 @@ export const Favorites = styled.div`
 `
 
 export const FavoritesIcon = styled(FaHeart)`
-  color: #3c4453;
+  color: ${({ active }) => (active ? "#058690" : "#3c4453")};
   font-size: 20px;
   cursor: pointer;
 

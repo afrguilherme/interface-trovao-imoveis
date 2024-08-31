@@ -15,7 +15,8 @@ export const CountButton = styled.button`
   height: 45px;
   background-color: transparent;
   border-radius: 10px;
-  border: 1px solid rgba(60, 68, 83, 0.4);
+  border: ${({ selected }) =>
+    selected ? "2px solid #058690" : "1px solid rgba(60, 68, 83, 0.4)"};
   outline: none;
   cursor: pointer;
 

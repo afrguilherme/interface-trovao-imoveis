@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useUser } from "../../hooks/UserContext.jsx"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 import { useSearchParams } from "react-router-dom"
 
 import {
@@ -27,6 +27,7 @@ import DefaultButton from "../DefaultButton"
 
 const Navbar = () => {
   const navigate = useNavigate()
+  const location = useLocation()
   const [isLogoutModalVisible, setIsLogoutModalVisible] = useState(false)
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
@@ -78,16 +79,27 @@ const Navbar = () => {
         <SearchIcon onClick={handleSearch} />
       </SearchBar>
       <Links>
-        <NavLink href="/">Início</NavLink>
-        <NavLink href="/imoveis">Imóveis</NavLink>
-        <NavLink href="/contato">Contato</NavLink>
-        <NavLink href="/sobre">Sobre</NavLink>
+        <NavLink href="/" active={location.pathname === "/"}>
+          Início
+        </NavLink>
+        <NavLink href="/imoveis" active={location.pathname === "/imoveis"}>
+          Imóveis
+        </NavLink>
+        <NavLink href="/contato" active={location.pathname === "/contato"}>
+          Contato
+        </NavLink>
+        <NavLink href="/sobre" active={location.pathname === "/sobre"}>
+          Sobre
+        </NavLink>
       </Links>
 
       {isUserLoggedIn ? (
         <UserRightSection>
           <Favorites>
-            <FavoritesIcon onClick={() => navigate("/favoritos")} />
+            <FavoritesIcon
+              onClick={() => navigate("/favoritos")}
+              active={location.pathname === "/favoritos"}
+            />
           </Favorites>
           <UserInfo>
             <UserIcon className="userStyles" />
@@ -98,7 +110,10 @@ const Navbar = () => {
       ) : (
         <RightSection>
           <Favorites>
-            <FavoritesIcon onClick={() => navigate("/login")} />
+            <FavoritesIcon
+              onClick={() => navigate("/login")}
+              active={location.pathname === "/favoritos"}
+            />
           </Favorites>
           <DefaultButton onClick={() => navigate("/login")}>
             Entrar
