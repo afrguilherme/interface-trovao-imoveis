@@ -73,21 +73,36 @@ export const ValuesWrap = styled.div`
 `
 
 export const ValueDetail = styled.div`
-  input {
-    width: 100%;
-    max-width: 80%;
-    padding: 8px 0;
-    border-radius: 10px;
-    border: 1px solid rgba(60, 68, 83, 0.8);
-    outline: none;
-    padding-left: 10px;
-    font-size: 16px;
-  }
-
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
   }
 `
+
+export const InputContainer = styled.div`
+  position: relative;
+  display: inline-block;
+`
+
+export const Input = styled.input`
+  width: 100%;
+  max-width: 90%;
+  padding: 8px 0;
+  border-radius: 10px;
+  border: 1px solid rgba(60, 68, 83, 0.8);
+  outline: none;
+  padding-left: ${({ price }) => (price ? "35px" : "10px")};
+  font-size: 16px;
+`
+
+export const CurrencyIcon = styled.span`
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #555;
+`
+
 export const CheckboxSection = styled.div`
   width: 100%;
   display: flex;

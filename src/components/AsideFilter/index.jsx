@@ -13,13 +13,16 @@ import {
   ValueDetail,
   CheckboxSection,
   ButtonsSection,
+  InputContainer,
+  CurrencyIcon,
+  Input,
 } from "./styles"
 
 import SelectSection from "../SelectSection"
 import CountSection from "../CountSection"
 import DefaultButton from "../DefaultButton"
 
-import { formatInputCurrency } from "../../utils/formatUtils"
+import { formatToBRL } from "../../utils/formatUtils"
 import { selectData } from "../../utils/selectOptionsData"
 
 const AsideFilter = ({ onFilter }) => {
@@ -156,25 +159,29 @@ const AsideFilter = ({ onFilter }) => {
             <ValuesWrap>
               <ValueDetail>
                 <Title>Mínimo</Title>
-                <input
-                  placeholder="R$ 0,00"
-                  type="text"
-                  value={minPrice}
-                  onChange={(e) =>
-                    setMinPrice(handleInputValue(e.target.value))
-                  }
-                />
+                <InputContainer>
+                  <CurrencyIcon>R$</CurrencyIcon>
+                  <Input
+                    placeholder="0,00"
+                    type="text"
+                    value={minPrice}
+                    onChange={(e) => setMinPrice(formatToBRL(e.target.value))}
+                    price
+                  />
+                </InputContainer>
               </ValueDetail>
               <ValueDetail>
                 <Title>Máximo</Title>
-                <input
-                  placeholder="R$ 0,00"
-                  type="text"
-                  value={maxPrice}
-                  onChange={(e) =>
-                    setMaxPrice(handleInputValue(e.target.value))
-                  }
-                />
+                <InputContainer>
+                  <CurrencyIcon>R$</CurrencyIcon>
+                  <Input
+                    placeholder="0,00"
+                    type="text"
+                    value={maxPrice}
+                    onChange={(e) => setMaxPrice(formatToBRL(e.target.value))}
+                    price
+                  />
+                </InputContainer>
               </ValueDetail>
             </ValuesWrap>
           </ValueSection>
@@ -183,7 +190,7 @@ const AsideFilter = ({ onFilter }) => {
             <ValuesWrap>
               <ValueDetail>
                 <Title>Mínimo</Title>
-                <input
+                <Input
                   placeholder="0 m²"
                   type="number"
                   value={minArea}
@@ -192,12 +199,12 @@ const AsideFilter = ({ onFilter }) => {
               </ValueDetail>
               <ValueDetail>
                 <Title>Máximo</Title>
-                <input
+                <Input
                   placeholder="0 m²"
                   type="number"
                   value={maxArea}
                   onChange={(e) => setMaxArea(e.target.value)}
-                ></input>
+                ></Input>
               </ValueDetail>
             </ValuesWrap>
           </ValueSection>

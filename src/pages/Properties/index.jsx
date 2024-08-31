@@ -1,6 +1,7 @@
 import api from "../../services/api"
 import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
+import toast, { Toaster } from "react-hot-toast"
 
 import { Container, PropertiesContainer } from "./styles"
 
@@ -36,6 +37,35 @@ function Properties() {
   }, [properties, searchParams])
 
   const handleFilter = (filters) => {
+    const maxPriceValue = filters.maxPrice
+      ? parseInt(
+          filters.maxPrice
+            .replace("R$", "")
+            .replace(/\./g, "")
+            .replace(",", ".")
+            .trim()
+        )
+      : null
+
+    const minPriceValue = filters.minPrice
+      ? parseInt(
+          filters.minPrice
+            .replace("R$", "")
+            .replace(/\./g, "")
+            .replace(",", ".")
+            .trim()
+        )
+      : null
+
+    if (
+      maxPriceValue !== null &&
+      minPriceValue !== null &&
+      maxPriceValue < minPriceValue
+    ) {
+      toast.error("O valor máximo não pode ser menor que o valor mínimo")
+      return
+    }
+
     const filtered = properties.filter((property) => {
       const matchesCategory =
         filters.category && filters.category !== "Todos"
@@ -60,32 +90,9 @@ function Properties() {
               .trim()
           )
         : true
-      const matchesMaxPrice =
-        filters.maxPrice &&
-        (!filters.minPrice ||
-          parseInt(
-            filters.maxPrice
-              .replace("R$", "")
-              .replace(/\./g, "")
-              .replace(",", ".")
-              .trim()
-          ) >=
-            parseInt(
-              filters.minPrice
-                .replace("R$", "")
-                .replace(/\./g, "")
-                .replace(",", ".")
-                .trim()
-            ))
-          ? property.price <=
-            parseInt(
-              filters.maxPrice
-                .replace("R$", "")
-                .replace(/\./g, "")
-                .replace(",", ".")
-                .trim()
-            )
-          : true
+      const matchesMaxPrice = filters.maxPrice
+        ? property.price <= maxPriceValue
+        : true
       const matchesMinArea = filters.minArea
         ? parseInt(property.dimensions.replace("m²", "").trim()) >=
           parseInt(filters.minArea)

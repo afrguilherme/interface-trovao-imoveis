@@ -5,14 +5,12 @@ export const formatCurrency = (value) => {
   }).format(value)
 }
 
-export const formatInputCurrency = (value) => {
-  value = value.replace(/\D/g, "")
+export const formatToBRL = (value) => {
+  let numericValue = value.replace(/\D/g, "")
 
-  value = (value / 100).toFixed(2)
+  if (!numericValue) return ""
 
-  value = value.replace(".", ",")
+  numericValue = (numericValue / 100).toFixed(2).replace(".", ",")
 
-  value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-
-  return "R$ " + value
+  return numericValue.replace(/\B(?=(\d{3})+(?!\d))/g, ".")
 }
