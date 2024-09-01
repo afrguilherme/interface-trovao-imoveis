@@ -1,7 +1,7 @@
 import { DetailsSection, OptionsWrap, CountButton, Title } from "./styles"
 
 const CountSection = ({ title, selectedValue, onSelect }) => {
-  const countOptions = ["1", "2", "3", "4 +"]
+  const countOptions = ["1", "2", "3", "4+"]
 
   return (
     <DetailsSection>
