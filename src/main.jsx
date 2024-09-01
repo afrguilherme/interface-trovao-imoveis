@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client"
 import AppProvider from "./hooks"
 
 import { RouterProvider } from "react-router-dom"
-import router from "./routes.jsx"
+import router from "./routes/routes"
 
 import { GlobalStyles } from "./GlobalStyles"
 import { Toaster } from "react-hot-toast"

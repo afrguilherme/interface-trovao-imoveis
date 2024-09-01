@@ -34,7 +34,11 @@ function Login() {
 
   useEffect(() => {
     if (userData && Object.keys(userData).length > 0) {
-      navigate("/")
+      if (userData.admin || userData.operator) {
+        navigate("/admin")
+      } else {
+        navigate("/")
+      }
     }
   }, [userData])
 
