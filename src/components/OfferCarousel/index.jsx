@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 
 import { CarouselStyles } from "./styles"
 
-import PropertyCard from "../PropertyCard"
+import OfferCard from "../OfferCard"
 
 const OfferCarousel = () => {
   const [properties, setProperties] = useState([])
@@ -22,7 +22,7 @@ const OfferCarousel = () => {
         properties
           .filter((property) => property.offer === true)
           .map((property) => (
-            <PropertyCard key={property.id} property={property} />
+            <OfferCard key={property.id} property={property} />
           ))}
     </CarouselStyles>
   )

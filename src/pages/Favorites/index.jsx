@@ -16,7 +16,7 @@ import {
   CardsContainer,
 } from "./styles"
 
-import FavoriteCard from "../../components/FavoriteCard/index.jsx"
+import PropertyCard from "../../components/PropertyCard/index.jsx"
 
 function Favorites() {
   const { userData } = useUser()
@@ -78,7 +78,11 @@ function Favorites() {
             <CardsContainer>
               {sortedFavorites &&
                 sortedFavorites.map((property) => (
-                  <FavoriteCard property={property} key={property.id} />
+                  <PropertyCard
+                    favoriteCard
+                    property={property}
+                    key={property.id}
+                  />
                 ))}
             </CardsContainer>
           )}

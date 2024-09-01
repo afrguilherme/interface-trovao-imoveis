@@ -1,27 +1,24 @@
-import { useFavorites } from "../../hooks/FavoritesContext"
+import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
-import { useUser } from "../../hooks/UserContext"
+import { formatCurrency } from "../../utils/formatUtils"
+import { formatDate, formatTime } from "../../utils/dateTime"
+import { StylePropertyCard, DeleteIcon, FavoriteStyles } from "./styles"
 
-import {
-  Property,
-  NeighborhoodButton,
-  FavoriteStyles,
-  BottomDetails,
-} from "./styles"
+import { useFavorites } from "../../hooks/FavoritesContext"
+import { useUser } from "../../hooks/UserContext"
 
 import PropertyDetails from "../PropertyDetails"
 
-import { formatCurrency } from "../../utils/formatUtils"
-import { useEffect } from "react"
-
-const PropertyCard = ({ property }) => {
+const PropertyCard = ({ property, favoriteCard }) => {
   const {
     putFavorites,
     favoritesProperties,
     isEmptyObject,
     setFavoritesProperties,
+    removeFavorite,
   } = useFavorites()
+
   const { userData } = useUser()
   const navigate = useNavigate()
 
@@ -51,21 +48,42 @@ const PropertyCard = ({ property }) => {
     }
   }
 
+  const deleteFavorite = (propertyId) => {
+    removeFavorite(propertyId)
+  }
+
   return (
-    <Property className="property-div">
-      <img src={property.url[0]} alt="ícone do imóvel" />
-      <NeighborhoodButton>{property.neighborhood}</NeighborhoodButton>
-      <PropertyDetails
-        dimensions={property.dimensions}
-        bathrooms={property.bathrooms}
-        parkingSpace={property.parking_space}
-        rooms={property.rooms}
-      />
-      <BottomDetails>
-        <p>{formatCurrency(property.price)}</p>
+    <StylePropertyCard key={property.id}>
+      <div className="left-section">
+        <img alt="imagem-imóvel" src={property.url[0]} />
+        <div className="property-info">
+          <div>
+            <p style={{ marginBottom: "10px" }}>{property.name}</p>
+            <p style={{ color: "#000", fontSize: "18px" }}>
+              {formatCurrency(property.price)}
+            </p>
+            <PropertyDetails
+              dimensions={property.dimensions}
+              bathrooms={property.bathrooms}
+              parkingSpace={property.parking_space}
+              rooms={property.rooms}
+            />
+          </div>
+          <div>
+            <p>{property.neighborhood}</p>
+            <p style={{ fontSize: "12px", marginTop: "8px" }}>
+              {formatDate(property.createdAt)} -{" "}
+              {formatTime(property.createdAt)}
+            </p>
+          </div>
+        </div>
+      </div>
+      {favoriteCard ? (
+        <DeleteIcon onClick={() => deleteFavorite(property.id)} />
+      ) : (
         <FavoriteStyles onClick={handleFavoriteClick} isFavorite={isFavorite} />
-      </BottomDetails>
-    </Property>
+      )}
+    </StylePropertyCard>
   )
 }
 

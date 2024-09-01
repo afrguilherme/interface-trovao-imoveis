@@ -3,10 +3,9 @@ import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import toast, { Toaster } from "react-hot-toast"
 
-import { Container, PropertiesContainer } from "./styles"
+import { Container, PropertiesContainer, EmptyContainer } from "./styles"
 
 import AsideFilter from "../../components/AsideFilter"
-
 import PropertyCard from "../../components/PropertyCard"
 
 function Properties() {
@@ -140,16 +139,21 @@ function Properties() {
     <>
       <Container>
         <AsideFilter onFilter={handleFilter} />
-        <PropertiesContainer>
-          {filteredProperties &&
-            filteredProperties.map((property) => (
+        {filteredProperties && filteredProperties.length > 0 ? (
+          <PropertiesContainer>
+            {filteredProperties.map((property) => (
               <PropertyCard
                 style={{ maxHeight: "450px" }}
                 key={property.id}
                 property={property}
               />
             ))}
-        </PropertiesContainer>
+          </PropertiesContainer>
+        ) : (
+          <EmptyContainer>
+            <h3>Nenhum imóvel encontrado :(</h3>
+          </EmptyContainer>
+        )}
       </Container>
     </>
   )

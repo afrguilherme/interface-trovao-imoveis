@@ -10,12 +10,10 @@ export const Container = styled.div`
 
 export const PropertiesContainer = styled.div`
   width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   border-radius: 20px;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  grid-column-gap: 10px;
-  grid-row-gap: 20px;
   padding: 0 20px;
   outline: none;
   overflow-y: scroll;
@@ -41,5 +39,18 @@ export const PropertiesContainer = styled.div`
   // Estilos da barra quando está em hover .
   &::-webkit-scrollbar-thumb:hover {
     background-color: rgba(60, 68, 83, 0.8);
+  }
+`
+
+export const EmptyContainer = styled.div`
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h3 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #3c4453;
   }
 `
