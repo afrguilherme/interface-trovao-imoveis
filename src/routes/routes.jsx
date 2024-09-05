@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom"
+import { Navigate } from "react-router-dom"
 
 import Layout from "../components/Layout"
 import Home from "../pages/Home"
@@ -6,7 +7,12 @@ import Properties from "../pages/Properties"
 import Login from "../pages/Login"
 import Register from "../pages/Register"
 import Favorites from "../pages/Favorites"
+
 import Admin from "../pages/Admin"
+import PropertyList from "../components/PropertyList"
+import PropertyRegister from "../components/PropertyRegister"
+import CategoryRegister from "../components/CategoryRegister"
+import ManageUser from "../components/ManageUser"
 
 import PrivateRoute from "./privateRoute"
 
@@ -48,10 +54,38 @@ const router = createBrowserRouter([
     element: (
       <PrivateRoute>
         <Layout>
+          <Navigate to="/admin/listar-imoveis" replace />
+        </Layout>
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: "/admin",
+    element: (
+      <PrivateRoute>
+        <Layout>
           <Admin />
         </Layout>
       </PrivateRoute>
     ),
+    children: [
+      {
+        path: "listar-imoveis",
+        element: <PropertyList />,
+      },
+      {
+        path: "cadastrar-imoveis",
+        element: <PropertyRegister />,
+      },
+      {
+        path: "cadastrar-categorias",
+        element: <CategoryRegister />,
+      },
+      {
+        path: "gerenciar-usuarios",
+        element: <ManageUser />,
+      },
+    ],
   },
 ])
 
