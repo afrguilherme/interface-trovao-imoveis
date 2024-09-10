@@ -42,27 +42,32 @@ export const Aside = styled.aside`
 
 export const LinkStyles = styled(Link)`
   text-decoration: none;
-  color: #3c4453;
+  color: ${({ selected }) => (selected ? "#1976D2" : "#3c4453")};
   font-size: 18px;
   font-weight: 500;
 `
 
 export const PropertyLapTopIcon = styled(FaLaptopHouse)`
   font-size: 30px;
+  color: ${({ selected }) => (selected ? "#1976D2" : "#3c4453")};
 `
 
 export const AddPropertyIcon = styled(BsFillHouseAddFill)`
   font-size: 30px;
+  color: ${({ selected }) => (selected ? "#1976D2" : "#3c4453")};
 `
 
 export const AddCategoryIcon = styled(BiSolidCategoryAlt)`
   font-size: 30px;
+  color: ${({ selected }) => (selected ? "#1976D2" : "#3c4453")};
 `
 
 export const UserConfigIcon = styled(FaUserCog)`
   font-size: 30px;
+  color: ${({ selected }) => (selected ? "#1976D2" : "#3c4453")};
 `
 
 export const Main = styled.main`
   width: 80%;
+  color: ${({ selected }) => (selected ? "#1976D2" : "#3c4453")};
 `
