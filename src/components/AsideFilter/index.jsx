@@ -81,7 +81,6 @@ const AsideFilter = ({ onFilter }) => {
       isOffer,
     }
     onFilter(filters)
-    console.log(filters)
   }
 
   const handleClearFilters = () => {

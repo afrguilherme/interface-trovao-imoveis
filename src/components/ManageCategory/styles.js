@@ -9,11 +9,12 @@ export const Container = styled.div`
   }
 `
 
-export const RegisterContainer = styled.div`
+export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 20px;
   margin: 50px 0 80px 0;
+  overflow-y: hidden;
 `
 
 export const InputLabel = styled.label`
@@ -26,6 +27,23 @@ export const RegisterWrap = styled.div`
   display: flex;
   align-items: center;
   gap: 20px;
+`
+
+export const EditWrap = styled.div`
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  .bottom-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .bottom {
+    display: flex;
+  }
 `
 
 export const Input = styled.input`

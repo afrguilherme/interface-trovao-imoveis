@@ -11,7 +11,7 @@ import Favorites from "../pages/Favorites"
 import Admin from "../pages/Admin"
 import PropertyList from "../components/PropertyList"
 import PropertyRegister from "../components/PropertyRegister"
-import CategoryRegister from "../components/CategoryRegister"
+import ManageCategory from "../components/ManageCategory"
 import ManageUser from "../components/ManageUser"
 
 import PrivateRoute from "./privateRoute"
@@ -78,8 +78,8 @@ const router = createBrowserRouter([
         element: <PropertyRegister />,
       },
       {
-        path: "cadastrar-categorias",
-        element: <CategoryRegister />,
+        path: "gerenciar-categorias",
+        element: <ManageCategory />,
       },
       {
         path: "gerenciar-usuarios",

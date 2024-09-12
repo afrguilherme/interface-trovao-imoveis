@@ -9,7 +9,8 @@ import { FaUserCog } from "react-icons/fa"
 export const Container = styled.div`
   display: flex;
   gap: 40px;
-  padding: 0 20px;
+  padding: 20px 20px;
+  overflow-y: hidden;
 `
 
 export const Aside = styled.aside`

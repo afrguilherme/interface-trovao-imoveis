@@ -27,8 +27,8 @@ function Admin() {
       icon: AddPropertyIcon,
     },
     {
-      path: "/admin/cadastrar-categorias",
-      label: "Cadastrar Categorias",
+      path: "/admin/gerenciar-categorias",
+      label: "Gerenciar Categorias",
       icon: AddCategoryIcon,
     },
     {
