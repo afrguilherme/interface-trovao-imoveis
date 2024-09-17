@@ -1,5 +1,4 @@
-import { useState } from "react"
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
 
 import {
   Container,
@@ -13,7 +12,7 @@ import {
 } from "./styles"
 
 function Admin() {
-  const [activeIndex, setActiveIndex] = useState(0)
+  const location = useLocation()
 
   const menuItems = [
     {
@@ -44,14 +43,11 @@ function Admin() {
         <ul>
           {menuItems.map((item, index) => {
             const IconComponent = item.icon
+            const isActive = location.pathname === item.path
             return (
-              <li
-                key={index}
-                onClick={() => setActiveIndex(index)}
-                selected={activeIndex === index}
-              >
-                <IconComponent selected={activeIndex === index} />
-                <LinkStyles to={item.path} selected={activeIndex === index}>
+              <li key={index} selected={isActive}>
+                <IconComponent selected={isActive} />
+                <LinkStyles to={item.path} selected={isActive}>
                   {item.label}
                 </LinkStyles>
               </li>
