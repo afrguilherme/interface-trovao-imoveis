@@ -9,7 +9,7 @@ import Register from "../pages/Register"
 import Favorites from "../pages/Favorites"
 
 import Admin from "../pages/Admin"
-import PropertyList from "../components/PropertyList"
+import ManageProperties from "../components/ManageProperties"
 import PropertyRegister from "../components/PropertyRegister"
 import ManageCategory from "../components/ManageCategory"
 import ManageUser from "../components/ManageUser"
@@ -54,7 +54,7 @@ const router = createBrowserRouter([
     element: (
       <PrivateRoute>
         <Layout>
-          <Navigate to="/admin/listar-imoveis" replace />
+          <Navigate to="/admin/gerenciar-imoveis" replace />
         </Layout>
       </PrivateRoute>
     ),
@@ -70,8 +70,8 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "listar-imoveis",
-        element: <PropertyList />,
+        path: "gerenciar-imoveis",
+        element: <ManageProperties />,
       },
       {
         path: "cadastrar-imoveis",

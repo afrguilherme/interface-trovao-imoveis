@@ -48,6 +48,7 @@ export const EditWrap = styled.div`
 
 export const Input = styled.input`
   width: 80%;
+  min-width: 500px;
   padding: 8px;
   border-radius: 8px;
   outline: none;

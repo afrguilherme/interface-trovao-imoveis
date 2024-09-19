@@ -35,7 +35,7 @@ function Login() {
   useEffect(() => {
     if (userData && Object.keys(userData).length > 0) {
       if (userData.admin || userData.operator) {
-        navigate("/admin/listar-imoveis")
+        navigate("/admin/gerenciar-imoveis")
       } else {
         navigate("/")
       }

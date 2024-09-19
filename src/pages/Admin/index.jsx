@@ -16,15 +16,16 @@ function Admin() {
 
   const menuItems = [
     {
-      path: "/admin/listar-imoveis",
-      label: "Listar Imóveis",
-      icon: PropertyLapTopIcon,
-    },
-    {
       path: "/admin/cadastrar-imoveis",
       label: "Cadastrar Imóveis",
       icon: AddPropertyIcon,
     },
+    {
+      path: "/admin/gerenciar-imoveis",
+      label: "Gerenciar Imóveis",
+      icon: PropertyLapTopIcon,
+    },
+
     {
       path: "/admin/gerenciar-categorias",
       label: "Gerenciar Categorias",
