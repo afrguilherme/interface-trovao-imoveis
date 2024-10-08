@@ -78,6 +78,12 @@ const PropertyRegister = () => {
 
   const onSubmit = async (data) => {
     console.log(data)
+
+    if (selectedFiles.length < 5 || selectedFiles.length > 10) {
+      toast.error("Você deve enviar entre 5 e 10 imagens.")
+      return
+    }
+
     try {
       const formData = new FormData()
 
@@ -257,8 +263,6 @@ const PropertyRegister = () => {
             multiple
             onChange={handleFileChange}
           ></Input>
-
-          {errors.files && <Errors>{errors.files.message}</Errors>}
         </InputWrap>
 
         <InputWrap>
