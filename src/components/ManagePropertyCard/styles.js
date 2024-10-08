@@ -68,12 +68,12 @@ export const InteractionWrap = styled.div`
   display: flex;
   align-items: center;
   gap: 30px;
-  font-size: 20px;
+  font-size: 18px;
 `
 
 export const EditIcon = styled(FaEdit)`
   &:hover {
-    opacity: 0.8;
+    color: #058690;
   }
 
   &:active {
@@ -83,7 +83,7 @@ export const EditIcon = styled(FaEdit)`
 
 export const DeleteIcon = styled(FaTrashAlt)`
   &:hover {
-    opacity: 0.8;
+    color: #058690;
   }
 
   &:active {

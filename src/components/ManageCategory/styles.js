@@ -12,7 +12,7 @@ export const Container = styled.div`
 export const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
   margin: 50px 0 80px 0;
   overflow-y: hidden;
 `

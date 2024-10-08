@@ -54,7 +54,7 @@ const router = createBrowserRouter([
     element: (
       <PrivateRoute>
         <Layout>
-          <Navigate to="/admin/gerenciar-imoveis" replace />
+          <Navigate to="/admin/cadastrar-imoveis" replace />
         </Layout>
       </PrivateRoute>
     ),
