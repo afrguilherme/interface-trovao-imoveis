@@ -57,7 +57,7 @@ const OfferCard = ({ property }) => {
       <img src={property.url[0]} alt="ícone do imóvel" />
       <NeighborhoodButton>{property.neighborhood}</NeighborhoodButton>
       <PropertyDetails
-        dimensions={property.dimensions}
+        dimensions={`${property.dimensions}m²`}
         bathrooms={property.bathrooms}
         parkingSpace={property.parking_space}
         rooms={property.rooms}

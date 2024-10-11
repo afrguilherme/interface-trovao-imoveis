@@ -63,7 +63,7 @@ const PropertyCard = ({ property, favoriteCard }) => {
               {formatCurrency(property.price)}
             </p>
             <PropertyDetails
-              dimensions={property.dimensions}
+              dimensions={`${property.dimensions}m²`}
               bathrooms={property.bathrooms}
               parkingSpace={property.parking_space}
               rooms={property.rooms}

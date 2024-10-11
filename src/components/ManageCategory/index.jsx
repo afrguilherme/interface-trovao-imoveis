@@ -42,7 +42,10 @@ const ManageCategory = () => {
     name: Yup.string()
       .required("O nome da categoria é obrigatório")
       .min(4, "O nome da categoria deve ter pelo menos 4 caracteres")
-      .matches(/^[A-Za-z\s]+$/, "O nome da categoria não pode conter números"),
+      .matches(
+        /^[A-Za-zÀ-ÿ\s]+$/,
+        "O nome da categoria não pode conter números"
+      ),
   })
 
   const handleCategorySubmit = async () => {

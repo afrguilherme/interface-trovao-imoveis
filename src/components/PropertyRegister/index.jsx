@@ -39,7 +39,9 @@ const PropertyRegister = () => {
     neighborhood: Yup.string().required("O bairro é obrigatório"),
     town_house: Yup.string(),
     status: Yup.string().required("O status do imóvel é obrigatório"),
-    dimensions: Yup.string().required("A área do imóvel é obrigatória"),
+    dimensions: Yup.number()
+      .required("A área do imóvel é obrigatória")
+      .positive("A área do imóvel deve ser um valor positivo"),
     rooms: Yup.number()
       .required("O número de quartos é obrigatório")
       .min(1, "Deve ter ao menos 1 quarto")
@@ -163,7 +165,7 @@ const PropertyRegister = () => {
         </InputWrap>
 
         <InputWrap>
-          <InputLabel>Nome do Condomínio *</InputLabel>
+          <InputLabel>Nome do Condomínio</InputLabel>
           <Input
             {...register("town_house")}
             placeholder="Digite o nome do condomínio..."
@@ -196,6 +198,7 @@ const PropertyRegister = () => {
         <InputWrap>
           <InputLabel>Dimensões *</InputLabel>
           <Input
+            type="number"
             {...register("dimensions")}
             placeholder="Digite as dimensões..."
           />
