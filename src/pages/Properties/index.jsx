@@ -105,13 +105,19 @@ function Properties() {
         : true
 
       const matchesMinArea = filters.minArea
-        ? parseInt(property.dimensions.replace("m²", "").trim()) >=
-          parseInt(filters.minArea)
+        ? parseInt(
+            property.dimensions && typeof property.dimensions === "string"
+              ? property.dimensions.replace("m²", "").trim()
+              : property.dimensions
+          ) >= parseInt(filters.minArea)
         : true
 
       const matchesMaxArea = filters.maxArea
-        ? parseInt(property.dimensions.replace("m²", "").trim()) <=
-          parseInt(filters.maxArea)
+        ? parseInt(
+            property.dimensions && typeof property.dimensions === "string"
+              ? property.dimensions.replace("m²", "").trim()
+              : property.dimensions
+          ) <= parseInt(filters.maxArea)
         : true
 
       const matchesStatus =

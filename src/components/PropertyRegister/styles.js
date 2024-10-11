@@ -33,6 +33,10 @@ export const InputWrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
 `
 
 export const CheckboxWrap = styled.div`

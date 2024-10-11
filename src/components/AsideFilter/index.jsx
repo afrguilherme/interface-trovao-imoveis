@@ -59,10 +59,6 @@ const AsideFilter = ({ onFilter }) => {
     loadFilterData()
   }, [])
 
-  const handleInputValue = (value) => {
-    return formatInputCurrency(value)
-  }
-
   const handleFilter = () => {
     const filters = {
       category: selectedCategory,
