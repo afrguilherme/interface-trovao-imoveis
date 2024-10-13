@@ -44,6 +44,7 @@ export const PropertiesContainer = styled.div`
 
 export const EmptyContainer = styled.div`
   width: 80%;
+  height: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;

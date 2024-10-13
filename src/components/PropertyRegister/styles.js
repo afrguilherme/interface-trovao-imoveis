@@ -44,7 +44,7 @@ export const CheckboxWrap = styled.div`
 `
 
 export const Input = styled.input`
-  width: 80%;
+  width: 60%;
   min-width: 500px;
   padding: 8px;
   border-radius: 8px;
@@ -63,7 +63,7 @@ export const Errors = styled.p`
 `
 
 export const TextArea = styled.textarea`
-  width: 80%;
+  width: 60%;
   min-width: 500px;
   padding: 12px 8px;
   border-radius: 8px;
@@ -78,7 +78,7 @@ export const TextArea = styled.textarea`
 `
 
 export const Select = styled.select`
-  width: 80%;
+  width: 60%;
   min-width: 500px;
   padding: 8px;
   border-radius: 8px;

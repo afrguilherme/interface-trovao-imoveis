@@ -79,8 +79,6 @@ const PropertyRegister = () => {
   })
 
   const onSubmit = async (data) => {
-    console.log(data)
-
     if (selectedFiles.length < 5 || selectedFiles.length > 10) {
       toast.error("Você deve enviar entre 5 e 10 imagens.")
       return
@@ -270,7 +268,7 @@ const PropertyRegister = () => {
 
         <InputWrap>
           <CheckboxWrap>
-            <InputLabel>Em Oferta</InputLabel>
+            <InputLabel>Em Destaque</InputLabel>
             <input
               style={{ marginLeft: "15px", scale: "1.3" }}
               {...register("offer")}

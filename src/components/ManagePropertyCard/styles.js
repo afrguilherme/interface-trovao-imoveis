@@ -6,6 +6,9 @@ export const Container = styled.div`
   width: 100%;
   max-width: 80vw;
   margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
 export const TableHeader = styled.div`
@@ -51,6 +54,19 @@ export const PropertyContainer = styled.div`
   img {
     width: 60px;
     border-radius: 5px;
+  }
+`
+
+export const EmptyContainer = styled.div`
+  height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h3 {
+    font-size: 16px;
+    font-weight: 500;
+    color: #3c4453;
   }
 `
 

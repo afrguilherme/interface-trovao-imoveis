@@ -6,6 +6,7 @@ import toast from "react-hot-toast"
 import {
   Container,
   PropertyContainer,
+  EmptyContainer,
   InfoWrap,
   InteractionWrap,
   EditIcon,
@@ -28,6 +29,19 @@ const ManagePropertyCard = () => {
     getProperties()
   }, [])
 
+  const DeleteProperty = async (id) => {
+    try {
+      await api.delete(`properties/${id}`)
+      setProperties((prevProperties) =>
+        prevProperties.filter((property) => property.id !== id)
+      )
+
+      toast.success("Imóvel deletado com sucesso!")
+    } catch (error) {
+      toast.error("Erro ao deletar o imóvel, tente novamente mais tarde")
+    }
+  }
+
   return (
     <Container>
       <TableHeader>
@@ -36,7 +50,8 @@ const ManagePropertyCard = () => {
         <p>Nome</p>
         <p>Interação</p>
       </TableHeader>
-      {properties &&
+
+      {properties && properties.length > 0 ? (
         properties.map((property) => (
           <PropertyContainer key={property.id}>
             <InfoWrap>
@@ -46,10 +61,15 @@ const ManagePropertyCard = () => {
             </InfoWrap>
             <InteractionWrap>
               <EditIcon />
-              <DeleteIcon />
+              <DeleteIcon onClick={() => DeleteProperty(property.id)} />
             </InteractionWrap>
           </PropertyContainer>
-        ))}
+        ))
+      ) : (
+        <EmptyContainer>
+          <h3>Nenhum imóvel encontrado :(</h3>
+        </EmptyContainer>
+      )}
     </Container>
   )
 }
