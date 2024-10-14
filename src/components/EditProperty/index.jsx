@@ -3,7 +3,7 @@ import * as Yup from "yup"
 import { useForm } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import toast from "react-hot-toast"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useLocation } from "react-router-dom"
 
 import api from "../../services/api"
 import { selectData } from "../../utils/selectOptionsData"
@@ -23,43 +23,56 @@ import {
 
 import DefaultButton from "../DefaultButton"
 
-const PropertyRegister = () => {
+const EditProperty = () => {
   const [categories, setCategories] = useState([])
   const [selectedFiles, setSelectedFiles] = useState([])
   const [phoneNumber, setPhoneNumber] = useState("")
 
   const navigate = useNavigate()
+  const location = useLocation()
+  const property = location.state?.property || {}
+
+  console.log(property)
 
   const schema = Yup.object().shape({
-    name: Yup.string().required("O nome do imóvel é obrigatório"),
+    name: Yup.string(),
     price: Yup.number()
-      .required("O preço do imóvel é obrigatório")
+
       .positive("O preço deve ser um valor positivo")
       .typeError("O preço deve ser um valor numérico"),
-    address: Yup.string().required("O endereço é obrigatório"),
-    neighborhood: Yup.string().required("O bairro é obrigatório"),
+    address: Yup.string(),
+    neighborhood: Yup.string(),
     town_house: Yup.string(),
-    status: Yup.string().required("O status do imóvel é obrigatório"),
-    dimensions: Yup.number()
-      .required("A área do imóvel é obrigatória")
-      .positive("A área do imóvel deve ser um valor positivo"),
+    status: Yup.string(),
+    dimensions: Yup.number().positive(
+      "A área do imóvel deve ser um valor positivo"
+    ),
     rooms: Yup.number()
-      .required("O número de quartos é obrigatório")
+
       .min(1, "Deve ter ao menos 1 quarto")
       .typeError("O número de quartos deve ser um valor numérico"),
-    parking_space: Yup.number()
-      .required("O número de vagas é obrigatório")
-      .typeError("O número de vagas deve ser um valor numérico"),
+    parking_space: Yup.number().typeError(
+      "O número de vagas deve ser um valor numérico"
+    ),
     bathrooms: Yup.number()
-      .required("O número de banheiros é obrigatório")
       .min(1, "Deve ter ao menos 1 banheiro")
       .typeError("O número de banheiros deve ser um valor numérico"),
     description: Yup.string().max(
       500,
       "A descrição deve ter no máximo 500 caracteres"
     ),
-    contact: Yup.string().required("O contato é obrigatório"),
+    contact: Yup.string(),
     offer: Yup.boolean(),
+  })
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
   })
 
   useEffect(() => {
@@ -71,54 +84,40 @@ const PropertyRegister = () => {
     loadFilterData()
   }, [])
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(schema),
-  })
+  useEffect(() => {
+    if (property && categories.length > 0) {
+      const formattedContact = formatPhoneNumber(property.contact || "")
+      setPhoneNumber(formattedContact)
+
+      reset({
+        ...property,
+        contact: formattedContact,
+        category: property.category?.id || "",
+      })
+
+      setValue("category", property.category?.id || "")
+    }
+  }, [property, categories, setValue, reset])
 
   const onSubmit = async (data) => {
-    if (selectedFiles.length < 5 || selectedFiles.length > 10) {
-      toast.error("Você deve enviar entre 5 e 10 imagens.")
-      return
-    }
-
     try {
       const formData = new FormData()
+      Object.keys(data).forEach((key) => formData.append(key, data[key]))
 
-      formData.append("name", data.name)
-      formData.append("price", data.price)
-      formData.append("category_id", data.category ? data.category : 4)
-      formData.append("address", data.address)
-      formData.append("neighborhood", data.neighborhood)
-      formData.append("town_house", data.town_house)
-      formData.append("status", data.status)
-      formData.append("dimensions", data.dimensions)
-      formData.append("rooms", data.rooms)
-      formData.append("parking_space", data.parking_space)
-      formData.append("bathrooms", data.bathrooms)
-      formData.append("description", data.description || "")
-      formData.append("contact", data.contact)
-      formData.append("offer", data.offer ? "true" : "false")
-
-      Array.from(selectedFiles).forEach((file) => {
+      Array.from(selectedFiles).forEach((file) =>
         formData.append("files", file)
+      )
+
+      const response = await api.put(`/properties/${property.id}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
       })
 
-      const response = await api.post("/properties", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-
-      if (response.status === 201) {
-        toast.success("Imóvel cadastrado com sucesso!")
+      if (response.status === 200) {
+        toast.success("Imóvel atualizado com sucesso!")
         navigate("/admin/gerenciar-imoveis")
       }
     } catch (err) {
-      toast.error("Erro ao cadastrar o imóvel. Tente novamente.")
+      toast.error("Erro ao atualizar o imóvel. Tente novamente.")
     }
   }
 
@@ -137,19 +136,19 @@ const PropertyRegister = () => {
       <h1>Cadastrar Novo Imóvel</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <InputWrap>
-          <InputLabel>Nome do Imóvel *</InputLabel>
+          <InputLabel>Nome do Imóvel</InputLabel>
           <Input {...register("name")} placeholder="Ex: Apartamento Village" />
           {errors.name && <Errors>{errors.name.message}</Errors>}
         </InputWrap>
 
         <InputWrap>
-          <InputLabel>Preço *</InputLabel>
+          <InputLabel>Preço</InputLabel>
           <Input {...register("price")} placeholder="R$ 0,00" type="number" />
           {errors.price && <Errors>{errors.price.message}</Errors>}
         </InputWrap>
 
         <InputWrap>
-          <InputLabel>Endereço *</InputLabel>
+          <InputLabel>Endereço</InputLabel>
           <Input
             {...register("address")}
             placeholder="Ex: Rua da Saudade, 45, Bl 1, Ap 301"
@@ -158,7 +157,7 @@ const PropertyRegister = () => {
         </InputWrap>
 
         <InputWrap>
-          <InputLabel>Bairro *</InputLabel>
+          <InputLabel>Bairro</InputLabel>
           <Input
             {...register("neighborhood")}
             placeholder="Digite o nome do bairro..."
@@ -178,7 +177,7 @@ const PropertyRegister = () => {
         </InputWrap>
 
         <InputWrap>
-          <InputLabel>Status *</InputLabel>
+          <InputLabel>Status</InputLabel>
           <Select {...register("status")}>
             <option value="Pronto">Pronto</option>
             <option value="Em construção">Em construção</option>
@@ -187,8 +186,8 @@ const PropertyRegister = () => {
         </InputWrap>
 
         <InputWrap>
-          <InputLabel>Tipo do imóvel *</InputLabel>
-          <Select defaultValue={4} {...register("category")}>
+          <InputLabel>Tipo do imóvel</InputLabel>
+          <Select {...register("category")}>
             {categories &&
               categories.slice(1).map((category) => (
                 <option key={category.id} value={category.id}>
@@ -200,17 +199,17 @@ const PropertyRegister = () => {
         </InputWrap>
 
         <InputWrap>
-          <InputLabel>Dimensões (m²)*</InputLabel>
+          <InputLabel>Dimensões (m²)</InputLabel>
           <Input
             type="number"
             {...register("dimensions")}
-            placeholder="00 m²"
+            placeholder="Digite as dimensões..."
           />
           {errors.dimensions && <Errors>{errors.dimensions.message}</Errors>}
         </InputWrap>
 
         <InputWrap>
-          <InputLabel>Quartos *</InputLabel>
+          <InputLabel>Quartos</InputLabel>
           <Input
             {...register("rooms")}
             placeholder="Número de quartos..."
@@ -220,7 +219,7 @@ const PropertyRegister = () => {
         </InputWrap>
 
         <InputWrap>
-          <InputLabel>Vagas de Estacionamento *</InputLabel>
+          <InputLabel>Vagas de Estacionamento</InputLabel>
           <Input
             {...register("parking_space")}
             placeholder="Número de vagas..."
@@ -232,7 +231,7 @@ const PropertyRegister = () => {
         </InputWrap>
 
         <InputWrap>
-          <InputLabel>Banheiros *</InputLabel>
+          <InputLabel>Banheiros</InputLabel>
           <Input
             {...register("bathrooms")}
             placeholder="Número de banheiros..."
@@ -251,7 +250,7 @@ const PropertyRegister = () => {
         </InputWrap>
 
         <InputWrap>
-          <InputLabel>Contato *</InputLabel>
+          <InputLabel>Contato</InputLabel>
 
           <Input
             {...register("contact")}
@@ -286,11 +285,11 @@ const PropertyRegister = () => {
         </InputWrap>
 
         <RegisterWrap>
-          <DefaultButton type="submit">Cadastrar</DefaultButton>
+          <DefaultButton type="submit">Atualizar Imóvel</DefaultButton>
         </RegisterWrap>
       </form>
     </Container>
   )
 }
 
-export default PropertyRegister
+export default EditProperty

@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
+
 import api from "../../services/api"
 
 import toast from "react-hot-toast"
@@ -16,6 +18,8 @@ import {
 
 const ManagePropertyCard = () => {
   const [properties, setProperties] = useState([])
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const getProperties = async () => {
@@ -42,6 +46,10 @@ const ManagePropertyCard = () => {
     }
   }
 
+  const handleEdit = (property) => {
+    navigate(`/admin/editar-imovel/${property.id}`, { state: { property } })
+  }
+
   return (
     <Container>
       <TableHeader>
@@ -60,7 +68,7 @@ const ManagePropertyCard = () => {
               <p>{property.name}</p>
             </InfoWrap>
             <InteractionWrap>
-              <EditIcon />
+              <EditIcon onClick={() => handleEdit(property)} />
               <DeleteIcon onClick={() => DeleteProperty(property.id)} />
             </InteractionWrap>
           </PropertyContainer>

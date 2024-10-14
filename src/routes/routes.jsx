@@ -10,6 +10,7 @@ import Favorites from "../pages/Favorites"
 
 import Admin from "../pages/Admin"
 import ManageProperties from "../components/ManageProperties"
+import EditProperty from "../components/EditProperty"
 import PropertyRegister from "../components/PropertyRegister"
 import ManageCategory from "../components/ManageCategory"
 import ManageUser from "../components/ManageUser"
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
       {
         path: "gerenciar-imoveis",
         element: <ManageProperties />,
+      },
+      {
+        path: `editar-imovel/:id`,
+        element: <EditProperty />,
       },
       {
         path: "cadastrar-imoveis",
