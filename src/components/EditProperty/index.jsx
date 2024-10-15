@@ -100,6 +100,8 @@ const EditProperty = () => {
   }, [property, categories, setValue, reset])
 
   const onSubmit = async (data) => {
+    console.log("Dados enviados:", data)
+
     try {
       const formData = new FormData()
       Object.keys(data).forEach((key) => formData.append(key, data[key]))
@@ -187,7 +189,11 @@ const EditProperty = () => {
 
         <InputWrap>
           <InputLabel>Tipo do imóvel</InputLabel>
-          <Select {...register("category")}>
+          <Select
+            {...register("category", {
+              onChange: (e) => setValue("category_id", e.target.value),
+            })}
+          >
             {categories &&
               categories.slice(1).map((category) => (
                 <option key={category.id} value={category.id}>

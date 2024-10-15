@@ -90,7 +90,7 @@ const PropertyRegister = () => {
 
       formData.append("name", data.name)
       formData.append("price", data.price)
-      formData.append("category_id", data.category ? data.category : 4)
+      formData.append("category_id", data.category ? data.category : 1)
       formData.append("address", data.address)
       formData.append("neighborhood", data.neighborhood)
       formData.append("town_house", data.town_house)
@@ -188,7 +188,7 @@ const PropertyRegister = () => {
 
         <InputWrap>
           <InputLabel>Tipo do imóvel *</InputLabel>
-          <Select defaultValue={4} {...register("category")}>
+          <Select defaultValue={1} {...register("category")}>
             {categories &&
               categories.slice(1).map((category) => (
                 <option key={category.id} value={category.id}>
