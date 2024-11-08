@@ -48,6 +48,7 @@ export const SearchInput = styled.input`
   border-radius: 20px;
   outline: none;
   transition: border 0.5s ease;
+  font-size: 16px;
 
   &:hover {
     border: 1.5px solid #058690;
@@ -116,14 +117,18 @@ export const UserIcon = styled(FaUser)`
 
 export const UserInfo = styled.div`
   height: 100%;
+  border-left: 1px solid #3c4453;
+`
+
+export const UserWrap = styled.div`
+  height: 100%;
   display: flex;
   align-items: center;
   gap: 12px;
   font-size: 16px;
   font-weight: 400;
   color: #3c4453;
-  border-left: 1px solid #3c4453;
-  padding-left: 40px;
+  margin-left: 40px;
   cursor: pointer;
 
   &:hover {

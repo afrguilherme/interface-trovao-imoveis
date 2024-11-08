@@ -32,8 +32,6 @@ const EditProperty = () => {
   const location = useLocation()
   const property = location.state?.property || {}
 
-  console.log(property)
-
   const schema = Yup.object().shape({
     name: Yup.string(),
     price: Yup.number()

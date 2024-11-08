@@ -80,8 +80,8 @@ const PropertyRegister = () => {
   })
 
   const onSubmit = async (data) => {
-    if (selectedFiles.length < 5 || selectedFiles.length > 10) {
-      toast.error("Você deve enviar entre 5 e 10 imagens.")
+    if (selectedFiles.length === 0) {
+      toast.error("Você deve cadastrar pelo menos 1 foto do imóvel")
       return
     }
 

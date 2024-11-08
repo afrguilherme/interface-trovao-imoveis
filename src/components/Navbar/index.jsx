@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { useUser } from "../../hooks/UserContext.jsx"
 import { useNavigate, useLocation } from "react-router-dom"
 import { useSearchParams } from "react-router-dom"
@@ -17,6 +17,7 @@ import {
   FavoritesIcon,
   UserInfo,
   UserIcon,
+  UserWrap,
   Logout,
 } from "./styles"
 
@@ -24,6 +25,7 @@ import LogoImage from "../../assets/logo.png"
 
 import LogoutModal from "../LogoutModal"
 import DefaultButton from "../DefaultButton"
+import UserMenu from "../UserMenu"
 
 const Navbar = () => {
   const navigate = useNavigate()
@@ -32,6 +34,8 @@ const Navbar = () => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [searchParams, setSearchParams] = useSearchParams()
+  const [isUserMenuVisible, setIsUserMenuVisible] = useState(false)
+  const userWrapRef = useRef(null)
 
   const { putUserData, userData } = useUser()
 
@@ -59,6 +63,27 @@ const Navbar = () => {
       handleSearch()
     }
   }
+
+  const toggleUserMenu = () => {
+    setIsUserMenuVisible((prev) => !prev)
+  }
+
+  const handleClickOutside = (event) => {
+    if (
+      isUserMenuVisible &&
+      userWrapRef.current &&
+      !userWrapRef.current.contains(event.target)
+    ) {
+      setIsUserMenuVisible(false)
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+    }
+  }, [])
 
   return (
     <Nav>
@@ -102,8 +127,11 @@ const Navbar = () => {
             />
           </Favorites>
           <UserInfo>
-            <UserIcon className="userStyles" />
-            <p className="userStyles">{userData.name}</p>
+            <UserWrap ref={userWrapRef} onClick={toggleUserMenu}>
+              <UserIcon className="userStyles" />
+              <p className="userStyles">{userData.name}</p>
+            </UserWrap>
+            {isUserMenuVisible && <UserMenu />}
           </UserInfo>
           <Logout onClick={showLogoutModal}>Sair</Logout>
         </UserRightSection>
