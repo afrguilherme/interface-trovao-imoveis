@@ -1,5 +1,6 @@
 import api from "../../services/api"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import { useSearchParams } from "react-router-dom"
 import toast, { Toaster } from "react-hot-toast"
 
@@ -12,6 +13,7 @@ function Properties() {
   const [properties, setProperties] = useState([])
   const [filteredProperties, setFilteredProperties] = useState([])
   const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
     async function getProperties() {
@@ -20,6 +22,10 @@ function Properties() {
     }
     getProperties()
   }, [])
+
+  const propertyNavigate = (id) => {
+    navigate(`/imoveis/${id}`)
+  }
 
   useEffect(() => {
     const query = searchParams.get("q") || ""
@@ -166,6 +172,7 @@ function Properties() {
           <PropertiesContainer>
             {filteredProperties.map((property) => (
               <PropertyCard
+                onClick={() => propertyNavigate(property.id)}
                 style={{ maxHeight: "450px" }}
                 key={property.id}
                 property={property}

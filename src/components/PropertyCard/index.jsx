@@ -10,7 +10,7 @@ import { useUser } from "../../hooks/UserContext"
 
 import PropertyDetails from "../PropertyDetails"
 
-const PropertyCard = ({ property, favoriteCard }) => {
+const PropertyCard = ({ property, favoriteCard, onClick }) => {
   const {
     putFavorites,
     favoritesProperties,
@@ -54,7 +54,7 @@ const PropertyCard = ({ property, favoriteCard }) => {
 
   return (
     <StylePropertyCard key={property.id}>
-      <div className="left-section">
+      <div onClick={onClick} className="left-section">
         <img alt="imagem-imóvel" src={property.url[0]} />
         <div className="property-info">
           <div>
