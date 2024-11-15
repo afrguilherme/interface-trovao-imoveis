@@ -52,16 +52,22 @@ const OfferCard = ({ property }) => {
     }
   }
 
+  const propertyNavigate = (id) => {
+    navigate(`/imoveis/${id}`)
+  }
+
   return (
     <Property className="property-div">
-      <img src={property.url[0]} alt="ícone do imóvel" />
-      <NeighborhoodButton>{property.neighborhood}</NeighborhoodButton>
-      <PropertyDetails
-        dimensions={`${property.dimensions}m²`}
-        bathrooms={property.bathrooms}
-        parkingSpace={property.parking_space}
-        rooms={property.rooms}
-      />
+      <div className="top-wrap" onClick={() => propertyNavigate(property.id)}>
+        <img src={property.url[0]} alt="ícone do imóvel" />
+        <NeighborhoodButton>{property.neighborhood}</NeighborhoodButton>
+        <PropertyDetails
+          dimensions={`${property.dimensions}m²`}
+          bathrooms={property.bathrooms}
+          parkingSpace={property.parking_space}
+          rooms={property.rooms}
+        />
+      </div>
       <BottomDetails>
         <p>{formatCurrency(property.price)}</p>
         <FavoriteStyles onClick={handleFavoriteClick} isFavorite={isFavorite} />

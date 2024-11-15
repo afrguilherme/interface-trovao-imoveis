@@ -2,7 +2,7 @@ import styled from "styled-components"
 import Carousel from "react-elastic-carousel"
 
 export const Container = styled.div`
-  height: 100vh;
+  height: max-content;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -28,7 +28,7 @@ export const PublishInfo = styled.p`
 
 export const CarouselSection = styled.div`
   width: 100%;
-  min-width: 40%;
+  min-width: 500px;
   height: max-content;
   background-color: #ffffff;
 
@@ -50,20 +50,48 @@ export const Price = styled.h3`
   color: #3c4453;
   font-size: 28px;
 
-  margin-top: 20px;
+  margin: 20px 0;
 `
 
 export const Description = styled.p`
   width: 100%;
   color: #3c4453;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
 
-  margin-top: 20px;
+  margin-top: 8px;
 `
 
 export const RightSection = styled.div`
   width: 45%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 70px;
 
-  background-color: grey;
+  .topic-value {
+    color: #3c4453;
+    font-size: 16px;
+    font-weight: 400;
+
+    margin-top: 8px;
+  }
+`
+
+export const LocalInfoWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+
+  width: 60%;
+  margin-top: 15px;
+`
+
+export const Topic = styled.p`
+  color: #3c4453;
+  font-size: 16px;
+  font-weight: 500;
+`
+
+export const StatusWrap = styled.div`
+  margin-top: 15px;
 `

@@ -22,6 +22,10 @@ const PropertyCard = ({ property, favoriteCard, onClick }) => {
   const { userData } = useUser()
   const navigate = useNavigate()
 
+  const propertyNavigate = (id) => {
+    navigate(`/imoveis/${id}`)
+  }
+
   const isFavorite =
     Array.isArray(favoritesProperties) &&
     favoritesProperties.some((fav) => fav.id === property.id)
@@ -54,7 +58,10 @@ const PropertyCard = ({ property, favoriteCard, onClick }) => {
 
   return (
     <StylePropertyCard key={property.id}>
-      <div onClick={onClick} className="left-section">
+      <div
+        onClick={() => propertyNavigate(property.id)}
+        className="left-section"
+      >
         <img alt="imagem-imóvel" src={property.url[0]} />
         <div className="property-info">
           <div>

@@ -13,6 +13,13 @@ export const Property = styled.div`
   outline: none;
   cursor: pointer;
 
+  .top-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
   img {
     max-width: 300px;
     width: 100%;

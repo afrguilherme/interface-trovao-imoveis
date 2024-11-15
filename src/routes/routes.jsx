@@ -7,7 +7,7 @@ import Properties from "../pages/Properties"
 import Login from "../pages/Login"
 import Register from "../pages/Register"
 import Favorites from "../pages/Favorites"
-import PropertyDetails from "../pages/PropertyDetails"
+import PropertyPage from "../pages/PropertyPage"
 
 import Admin from "../pages/Admin"
 import ManageProperties from "../components/ManageProperties"
@@ -47,7 +47,7 @@ const router = createBrowserRouter([
     path: "/imoveis/:id",
     element: (
       <Layout>
-        <PropertyDetails />
+        <PropertyPage />
       </Layout>
     ),
   },

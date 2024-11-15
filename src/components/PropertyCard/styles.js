@@ -19,6 +19,7 @@ export const StylePropertyCard = styled.div`
   }
 
   .left-section {
+    width: 95%;
     display: flex;
     gap: 20px;
   }

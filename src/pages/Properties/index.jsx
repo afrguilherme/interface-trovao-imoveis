@@ -23,10 +23,6 @@ function Properties() {
     getProperties()
   }, [])
 
-  const propertyNavigate = (id) => {
-    navigate(`/imoveis/${id}`)
-  }
-
   useEffect(() => {
     const query = searchParams.get("q") || ""
 
@@ -172,7 +168,6 @@ function Properties() {
           <PropertiesContainer>
             {filteredProperties.map((property) => (
               <PropertyCard
-                onClick={() => propertyNavigate(property.id)}
                 style={{ maxHeight: "450px" }}
                 key={property.id}
                 property={property}
