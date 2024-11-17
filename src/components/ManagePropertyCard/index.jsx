@@ -33,6 +33,10 @@ const ManagePropertyCard = () => {
     getProperties()
   }, [])
 
+  const propertyNavigate = (id) => {
+    navigate(`/imoveis/${id}`)
+  }
+
   const DeleteProperty = async (id) => {
     try {
       await api.delete(`properties/${id}`)
@@ -62,7 +66,7 @@ const ManagePropertyCard = () => {
       {properties && properties.length > 0 ? (
         properties.map((property) => (
           <PropertyContainer key={property.id}>
-            <InfoWrap>
+            <InfoWrap onClick={() => propertyNavigate(property.id)}>
               <img src={property.url[0]} alt="property-icon" />
               <p>{property.id}</p>
               <p>{property.name}</p>
