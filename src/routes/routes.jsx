@@ -8,6 +8,7 @@ import Login from "../pages/Login"
 import Register from "../pages/Register"
 import Favorites from "../pages/Favorites"
 import PropertyPage from "../pages/PropertyPage"
+import UnderConstruction from "../pages/UnderConstruction"
 
 import Admin from "../pages/Admin"
 import ManageProperties from "../components/ManageProperties"
@@ -100,6 +101,14 @@ const router = createBrowserRouter([
         element: <ManageUser />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: (
+      <Layout>
+        <UnderConstruction />
+      </Layout>
+    ),
   },
 ])
 
