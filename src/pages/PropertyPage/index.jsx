@@ -19,9 +19,8 @@ import {
   Price,
   Description,
   RightSection,
-  LocalInfoWrap,
   Topic,
-  StatusWrap,
+  DownDetails,
 } from "./styles"
 
 const PropertyPage = () => {
@@ -68,34 +67,39 @@ const PropertyPage = () => {
         </Description>
       </LeftSection>
       <RightSection>
-        <PropertyDetails
-          dimensions={property ? `${property.dimensions}m²` : ""}
-          bathrooms={property ? property.bathrooms : ""}
-          parkingSpace={property ? property.parking_space : ""}
-          rooms={property ? property.rooms : ""}
-        />
-        <LocalInfoWrap>
+        <div className="details-wrap">
+          <PropertyDetails
+            dimensions={property ? `${property.dimensions}m²` : ""}
+            bathrooms={property ? property.bathrooms : ""}
+            parkingSpace={property ? property.parking_space : ""}
+            rooms={property ? property.rooms : ""}
+          />
+        </div>
+        <DownDetails>
           <div>
             <Topic>Endereço</Topic>
             <p className="topic-value">
-              {property ? property.address : ""} -
+              {property ? property.address : ""} -{" "}
               {property ? " " + property.neighborhood : ""}
             </p>
           </div>
           <div>
             <Topic>Condomínio</Topic>
             <p className="topic-value">
-              {" "}
               {property?.town_house && property.town_house.trim() !== ""
                 ? property.town_house
                 : "N/A"}
             </p>
           </div>
-        </LocalInfoWrap>
-        <StatusWrap>
-          <Topic>Status</Topic>
-          <p className="topic-value">{property ? property.status : ""}</p>
-        </StatusWrap>
+          <div>
+            <Topic>Status</Topic>
+            <p className="topic-value">{property ? property.status : ""}</p>
+          </div>
+          <div>
+            <Topic>Contato</Topic>
+            <p className="topic-value">{property ? property.contact : ""}</p>
+          </div>
+        </DownDetails>
       </RightSection>
     </Container>
   )

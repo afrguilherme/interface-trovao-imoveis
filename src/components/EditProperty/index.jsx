@@ -98,8 +98,6 @@ const EditProperty = () => {
   }, [property, categories, setValue, reset])
 
   const onSubmit = async (data) => {
-    console.log("Dados enviados:", data)
-
     try {
       const formData = new FormData()
       Object.keys(data).forEach((key) => formData.append(key, data[key]))

@@ -68,6 +68,10 @@ export const RightSection = styled.div`
   flex-direction: column;
   padding-top: 70px;
 
+  .details-wrap {
+    width: 87%;
+  }
+
   .topic-value {
     color: #3c4453;
     font-size: 16px;
@@ -77,21 +81,24 @@ export const RightSection = styled.div`
   }
 `
 
-export const LocalInfoWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 50px;
+export const DownDetails = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 50px;
+  row-gap: 20px;
+  width: 100%;
+  margin-top: 20px;
 
-  width: 60%;
-  margin-top: 15px;
+  .topic-value {
+    margin-top: 8px;
+    color: #3c4453;
+    font-size: 16px;
+    font-weight: 400;
+  }
 `
 
 export const Topic = styled.p`
   color: #3c4453;
   font-size: 16px;
   font-weight: 500;
-`
-
-export const StatusWrap = styled.div`
-  margin-top: 15px;
 `
