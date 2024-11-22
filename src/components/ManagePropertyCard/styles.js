@@ -85,8 +85,6 @@ export const InteractionWrap = styled.div`
   align-items: center;
   gap: 30px;
   font-size: 18px;
-
-  pointer-events: none;
 `
 
 export const EditIcon = styled(FaEdit)`
