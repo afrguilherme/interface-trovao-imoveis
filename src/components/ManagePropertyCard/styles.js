@@ -14,7 +14,7 @@ export const Container = styled.div`
 export const TableHeader = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: 60px 1fr 2fr 1fr;
+  grid-template-columns: 60px 1fr 2fr 2fr 1fr 1fr;
   align-items: center;
   padding: 10px 0;
   border-bottom: 2px solid #ddd;
@@ -31,7 +31,7 @@ export const TableHeader = styled.div`
 export const PropertyContainer = styled.div`
   width: 100%;
   display: grid;
-  grid-template-columns: 60px 1fr 2fr 1fr;
+  grid-template-columns: 60px 1fr 2fr 2fr 1fr 1fr;
   align-items: center;
   padding: 20px 0;
   border-bottom: 1px solid #ddd;

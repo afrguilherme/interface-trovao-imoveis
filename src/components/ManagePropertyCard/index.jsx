@@ -60,6 +60,8 @@ const ManagePropertyCard = () => {
         <div></div> {/* Espaço vazio acima da imagem */}
         <p>Id</p>
         <p>Nome</p>
+        <p>Id do Usuário</p>
+        <p>Nome do Usuário</p>
         <p>Interação</p>
       </TableHeader>
 
@@ -70,6 +72,8 @@ const ManagePropertyCard = () => {
               <img src={property.url[0]} alt="property-icon" />
               <p>{property.id}</p>
               <p>{property.name}</p>
+              <p>{property.user.id}</p>
+              <p>{property.user.name}</p>
             </InfoWrap>
             <InteractionWrap>
               <EditIcon onClick={() => handleEdit(property)} />
