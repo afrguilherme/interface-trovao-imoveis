@@ -21,8 +21,6 @@ const ManagePropertyCard = () => {
   const [properties, setProperties] = useState([])
   const { userData } = useUser()
 
-  console.log(userData)
-
   const navigate = useNavigate()
 
   useEffect(() => {

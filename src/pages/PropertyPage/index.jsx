@@ -84,7 +84,7 @@ const PropertyPage = () => {
             </p>
           </div>
           <div>
-            <Topic>Condomínio</Topic>
+            <Topic>Nome do Condomínio</Topic>
             <p className="topic-value">
               {property?.town_house && property.town_house.trim() !== ""
                 ? property.town_house
