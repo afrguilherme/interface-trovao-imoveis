@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useUser } from "../../hooks/UserContext"
 
 import api from "../../services/api"
 
@@ -18,6 +19,9 @@ import {
 
 const ManagePropertyCard = () => {
   const [properties, setProperties] = useState([])
+  const { userData } = useUser()
+
+  console.log(userData)
 
   const navigate = useNavigate()
 
@@ -25,13 +29,18 @@ const ManagePropertyCard = () => {
     const getProperties = async () => {
       try {
         const { data } = await api.get("/properties")
-        setProperties(data)
+        // Filtrar propriedades com base no papel do usuário
+        const filteredProperties = userData.admin
+          ? data // Admin tem acesso a todos os imóveis
+          : data.filter((property) => property.user.email === userData.email) // Operator tem acesso apenas aos seus próprios imóveis
+
+        setProperties(filteredProperties)
       } catch (error) {
         toast.error("Falha ao carregar as informações dos imóveis")
       }
     }
     getProperties()
-  }, [])
+  }, [userData])
 
   const propertyNavigate = (id) => {
     navigate(`/imoveis/${id}`)
@@ -59,8 +68,8 @@ const ManagePropertyCard = () => {
       <TableHeader>
         <div></div> {/* Espaço vazio acima da imagem */}
         <p>Id</p>
-        <p>Nome</p>
-        <p>Id do Usuário</p>
+        <p>Nome do Imóvel</p>
+        <p>Email</p>
         <p>Nome do Usuário</p>
         <p>Interação</p>
       </TableHeader>
@@ -72,7 +81,7 @@ const ManagePropertyCard = () => {
               <img src={property.url[0]} alt="property-icon" />
               <p>{property.id}</p>
               <p>{property.name}</p>
-              <p>{property.user.id}</p>
+              <p>{property.user.email}</p>
               <p>{property.user.name}</p>
             </InfoWrap>
             <InteractionWrap>
