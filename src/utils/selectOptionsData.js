@@ -20,7 +20,11 @@ export const selectData = async () => {
   )
 
   const townHouses = Array.from(
-    new Set(propertiesResponse.data.map((property) => property.town_house))
+    new Set(
+      propertiesResponse.data
+        .map((property) => property.town_house)
+        .filter(Boolean) // Remove valores falsy
+    )
   )
 
   return {
