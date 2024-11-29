@@ -29,10 +29,10 @@ const ManagePropertyCard = () => {
     const getProperties = async () => {
       try {
         const { data } = await api.get("/properties")
-        // Filtrar propriedades com base no papel do usuário
+
         const filteredProperties = userData.admin
-          ? data // Admin tem acesso a todos os imóveis
-          : data.filter((property) => property.user.email === userData.email) // Operator tem acesso apenas aos seus próprios imóveis
+          ? data // Admin tem acesso a todos os imóveis.
+          : data.filter((property) => property.user.email === userData.email) // Operator tem acesso apenas aos seus próprios imóveis.
 
         setProperties(filteredProperties)
       } catch (error) {

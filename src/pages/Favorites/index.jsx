@@ -20,7 +20,7 @@ import PropertyCard from "../../components/PropertyCard/index.jsx"
 
 function Favorites() {
   const { userData } = useUser()
-  const { favoritesProperties } = useFavorites()
+  const { favoritesProperties = [] } = useFavorites()
 
   const [sortOption, setSortOption] = useState("Mais recente")
   const [sortedFavorites, setSortedFavorites] = useState([])
